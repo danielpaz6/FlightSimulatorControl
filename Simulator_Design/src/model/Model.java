@@ -141,7 +141,23 @@ public class Model extends Observable implements SimModel {
 		}
 		
 	}
-
+	
+	public void connectToMapServer(String ip, double port) {
+		
+		
+		try {
+			server.client.start(ip, (int)port);
+			
+			setChanged();
+			notifyObservers("connectToMapServer_success");
+		} catch (Exception e) {
+			
+			server.client = null;
+			setChanged();
+			notifyObservers("connectToMapServer_failed");
+		}
+	}
+	
 	@Override
 	public void runScript(String text) {
 		interpreter = new Interpreter(server);

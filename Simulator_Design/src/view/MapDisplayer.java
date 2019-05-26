@@ -20,6 +20,7 @@ public class MapDisplayer extends Canvas {
 	double widthBlock;
 	double heightBlock;
 	double max;
+	double markedX, markedY;
 	
 	public MapDisplayer(){
 		
@@ -74,12 +75,14 @@ public class MapDisplayer extends Canvas {
 	public void markDest(double posX, double posY) {
 		int corX = (int)(posX / widthBlock);
 		int corY = (int)(posY / heightBlock);
+		markedX = corX;
+		markedY = corY;
 		
 		try {
 			Image img = new Image(new FileInputStream("./resources/close.png"));
 			GraphicsContext gc = getGraphicsContext2D();
 			redraw(max);
-			gc.drawImage(img, corX*widthBlock, corY*heightBlock);
+			gc.drawImage(img, corX*widthBlock + 7, corY*heightBlock + 7);
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

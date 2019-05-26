@@ -50,6 +50,16 @@ public class ViewModel extends Observable implements Observer {
 		}
 	}
 	
+	public void connectToMapSolver() {
+		try {
+			model.connectToMapServer(text_ip.get(), Double.parseDouble(text_port.get()));
+		}
+		// Probably because text_port.get() = null and can't be parsed to Double
+		catch(Exception e) {
+			connect_result.set(true);
+		}
+	}
+	
 	public void updateAileronAndElevator() {
 		model.setAileron(aileron.get());
 		model.setElevator(elevator.get());
