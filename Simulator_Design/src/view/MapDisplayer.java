@@ -11,11 +11,16 @@ public class MapDisplayer extends Canvas {
 	double[][] coordinates;
 	
 	public MapDisplayer(){
+		coordinates = new double[][]{
+				{1,2,3,4},
+				{4,3,3,4},
+				{8,2,3,4}
+		};
 		
+		redraw();
 	}
 	
 	public void redraw() {
-		
 		double width = (double)(this.getWidth()) ;
 		double height = (double)(this.getHeight()) ;
 		double widthBlock = width / coordinates[0].length;
