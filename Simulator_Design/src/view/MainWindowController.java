@@ -53,7 +53,7 @@ public class MainWindowController implements Initializable, View, Observer {
 	
 	// Pages
 	@FXML
-	private AnchorPane add_pane, options_pane, dashboard_pane, projects_pane, script_pane, manual_pane;
+	private AnchorPane add_pane, options_pane, dashboard_pane, projects_pane, script_pane, manual_pane,map_pane;
 	
 	@FXML
 	private AnchorPane connectSim_pane;
