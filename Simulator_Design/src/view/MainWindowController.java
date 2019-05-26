@@ -288,10 +288,14 @@ public class MainWindowController implements Initializable, View, Observer {
 	public void update(Observable o, Object arg) {
 		if(o == viewModel)
 		{
-			if(arg.equals("done_closePopUp"))
+			if(arg.equals("done_closePopUp")) {
 				connectSim_pane.setVisible(false);
-			else if(arg.equals("setVisibleTrue_to_ConnectAnchorPane"))
+				map_pane.setVisible(false);
+			}
+			else if(arg.equals("setVisibleTrue_to_ConnectAnchorPane")) {
 				connectSim_pane.setVisible(true);
+				map_pane.setVisible(true);
+			}
 		}
 		
 	}
