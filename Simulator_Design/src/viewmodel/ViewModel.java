@@ -24,6 +24,9 @@ public class ViewModel extends Observable implements Observer {
 	// Run a script variables
 	public StringProperty scriptText;
 	
+	// Map String
+	public StringProperty mapCoordinateString;
+	
 	
 	public ViewModel(SimModel model) {
 		this.model = model;
@@ -37,6 +40,8 @@ public class ViewModel extends Observable implements Observer {
 		rudder = new SimpleDoubleProperty();
 		
 		scriptText = new SimpleStringProperty();
+		
+		mapCoordinateString = new SimpleStringProperty();
 	}
 	
 	public void connectToSim()

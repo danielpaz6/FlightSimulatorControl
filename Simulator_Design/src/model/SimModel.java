@@ -1,5 +1,9 @@
 package model;
 
+import java.util.List;
+
+import algorithms.Position;
+import algorithms.State;
 import interpreter.Server;
 
 public interface SimModel {
@@ -17,6 +21,10 @@ public interface SimModel {
 	// General Methods
 	public Server getServer(); // includes Server, Client details
 	public void connectToServer(String ip, double port); // Connecting to the Simulator as a client
+	
+	// Map Methods
+	public void connectToMapServer(String ip, double port, String mapText); // Getting solution from Server
+	public List<State<Position>> getMapPath();
 	
 	// Run a script Methods
 	public void runScript(String text);

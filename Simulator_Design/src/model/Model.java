@@ -1,15 +1,27 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.net.SocketException;
 import java.util.Observable;
 
+import algorithms.BestFirstSearch;
+import algorithms.MatrixProblem;
+import algorithms.Position;
 import interpreter.Interpreter;
 import interpreter.Server;
 import server.Client;
+import server_side.FileCacheManager;
+import server_side.MySerialServer;
+import server_side.SearchableClientHandler;
+import server_side.SearcherSolver;
 
 public class Model extends Observable implements SimModel {
-	Server server;
+	Server server; // Simulator Server
+	MySerialServer mapServer; // Map Problem Solver Server
 	Thread checkConnection;
 	Interpreter interpreter;
 	
@@ -142,11 +154,31 @@ public class Model extends Observable implements SimModel {
 		
 	}
 	
-	public void connectToMapServer(String ip, double port) {
-		
+	public void connectToMapServer(String ip, double port, String mapText) {
+		mapServer = new MySerialServer((int)port); 
 		
 		try {
-			server.client.start(ip, (int)port);
+			
+			// Starting the Server
+			SearchableClientHandler<String, Position> ch = new SearchableClientHandler<>(
+					new SearcherSolver<MatrixProblem, String, Position>(new BestFirstSearch<Position>()),
+					new FileCacheManager<MatrixProblem, String>("./maze.xml")
+			);
+			
+			mapServer.start(ch, "end"); // running the server
+			
+			// Starting the Client
+			Socket s=null;
+			PrintWriter out=null;
+			BufferedReader in=null;
+			s = new Socket(ip, (int)port);
+			s.setSoTimeout(3000);
+			out=new PrintWriter(s.getOutputStream());
+			in=new BufferedReader(new InputStreamReader(s.getInputStream()));
+			
+			
+			
+			//out.print(matrix[i][j]+",");
 			
 			setChanged();
 			notifyObservers("connectToMapServer_success");

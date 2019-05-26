@@ -19,6 +19,8 @@ import com.jfoenix.controls.JFXTextArea;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -85,11 +87,13 @@ public class MainWindowController implements Initializable, View, Observer {
 	private double initializedCenterY = 0;
 	
 	public DoubleProperty aileron, elevator;
+	public StringProperty getTextFromFile;
 	
 	
 	public MainWindowController() {
 		aileron = new SimpleDoubleProperty();
 		elevator = new SimpleDoubleProperty();
+		getTextFromFile = new SimpleStringProperty();
 	}
 	
 	@Override
@@ -104,6 +108,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		viewModel.rudder.bind(rudderSlider.valueProperty());
 		
 		viewModel.scriptText.bind(scriptTextArea.textProperty());
+		
+		viewModel.mapCoordinateString.bind(getTextFromFile);
 	}
 	
 	@Override
@@ -250,8 +256,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		if(chosen != null) {
 			try {
 				Scanner s = new Scanner(chosen);
-				String getTextFromFile = s.useDelimiter("\\A").next();
-				scriptTextArea.setText(getTextFromFile);
+				String getTextFromFile2 = s.useDelimiter("\\A").next();
+				scriptTextArea.setText(getTextFromFile2);
 				
 				//scripttext.getAccessibleText();
 				//System.out.println(getTextFromFile);
@@ -276,8 +282,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		if(chosen != null) {
 			try {
 				Scanner s = new Scanner(chosen);
-				String getTextFromFile = s.useDelimiter("\\A").next().trim();
-				String[] rows = getTextFromFile.split("\n");
+				getTextFromFile.set(s.useDelimiter("\\A").next().trim());
+				String[] rows = getTextFromFile.get().split("\n");
 				
 				String[] xy = rows[0].split(",");
 				
