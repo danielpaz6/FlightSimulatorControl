@@ -104,6 +104,11 @@
             </Label>
             <FontAwesomeIconView fill="WHITE" glyphName="PLANE" layoutX="69.0" layoutY="40.0" size="15" />
             <Line endX="33.33331298828125" layoutX="204.0" layoutY="52.0" startX="-136.66665649414062" stroke="WHITE" />
+            <JFXButton fx:id="btn_map" alignment="BASELINE_LEFT" layoutX="63.0" layoutY="211.0" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="185.0" text="Surface Map" textFill="WHITE">
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="GLOBE" size="15" />
+               </graphic>
+            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="add_pane" prefHeight="421.0" prefWidth="653.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">

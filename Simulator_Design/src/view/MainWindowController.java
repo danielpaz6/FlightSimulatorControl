@@ -46,7 +46,7 @@ public class MainWindowController implements Initializable, View, Observer {
 	
 	// Navigator Buttons
 	@FXML
-	private JFXButton btn_dashboard, btn_projects;
+	private JFXButton btn_dashboard, btn_projects, btn_map;
 	
 	@FXML
 	private JFXSlider rudderSlider, throttleSlider;
