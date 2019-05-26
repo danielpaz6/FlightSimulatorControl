@@ -20,6 +20,11 @@ public class MapDisplayer extends Canvas {
 		redraw();
 	}
 	
+	public void setMapData(double[][] coordinates) {
+		
+		this.coordinates = coordinates;
+	}
+	
 	public void redraw() {
 		if(coordinates != null) {
 			double width = (double)(this.getWidth()) ;
