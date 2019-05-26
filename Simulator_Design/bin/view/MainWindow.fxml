@@ -410,7 +410,7 @@
             <Label layoutX="31.0" layoutY="389.0" text="Last time online: 25/04/2019" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="31.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="manual_pane1" layoutX="462.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="map_pane" layoutX="462.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="28.0" layoutY="22.0" text="Surface Map Vision">
                <font>
