@@ -9,6 +9,7 @@
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -39,6 +40,11 @@
             <JFXButton fx:id="btn_manual" alignment="BASELINE_LEFT" layoutX="63.0" layoutY="177.0" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="185.0" text="Manual Control" textFill="WHITE">
                <graphic>
                   <OctIconView fill="WHITE" glyphName="MARKDOWN" size="15" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btn_map" alignment="BASELINE_LEFT" layoutX="63.0" layoutY="211.0" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="185.0" text="Surface Map" textFill="WHITE">
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="GLOBE" size="15" />
                </graphic>
             </JFXButton>
             <AnchorPane prefHeight="421.0" prefWidth="49.0" style="-fx-background-color: #07449e;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -104,11 +110,6 @@
             </Label>
             <FontAwesomeIconView fill="WHITE" glyphName="PLANE" layoutX="69.0" layoutY="40.0" size="15" />
             <Line endX="33.33331298828125" layoutX="204.0" layoutY="52.0" startX="-136.66665649414062" stroke="WHITE" />
-            <JFXButton fx:id="btn_map" alignment="BASELINE_LEFT" layoutX="63.0" layoutY="211.0" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="185.0" text="Surface Map" textFill="WHITE">
-               <graphic>
-                  <OctIconView fill="WHITE" glyphName="GLOBE" size="15" />
-               </graphic>
-            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="add_pane" prefHeight="421.0" prefWidth="653.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -407,6 +408,48 @@
                </children>
             </AnchorPane>
             <Label layoutX="31.0" layoutY="389.0" text="Last time online: 25/04/2019" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="31.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="manual_pane1" layoutX="462.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="28.0" layoutY="22.0" text="Surface Map Vision">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="66.0" text="In order to use the Surface Map Vision, you must" />
+            <Label layoutX="28.0" layoutY="90.0" text="load a CSV file from your local computer." />
+            <Canvas height="200.0" layoutX="28.0" layoutY="122.0" width="350.0" />
+            <JFXButton fx:id="btn_connectSim21" layoutX="28.0" layoutY="351.0" onAction="#openConnectPopUp" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 0.5em; -fx-border-color: #18a3fa; -fx-border-radius: 0.5em;" styleClass="btn_learnmore" text="Load Map" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_connectSim211" layoutX="137.0" layoutY="351.0" onAction="#openConnectPopUp" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 0.5em; -fx-border-color: #18a3fa; -fx-border-radius: 0.5em;" styleClass="btn_learnmore" text="Calculate Path" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <AnchorPane fx:id="connectSim_pane2" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <Label layoutX="43.0" layoutY="23.0" text="You must be connected to the Flight Simulator in order" />
+                  <Label layoutX="43.0" layoutY="40.0" text="to use the Surface Map panel." />
+                  <JFXButton fx:id="btn_connectSim2" layoutX="43.0" layoutY="93.0" onAction="#openConnectPopUp" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 0.5em; -fx-border-color: #18a3fa; -fx-border-radius: 0.5em;" styleClass="btn_learnmore" text="Connect to the Simulator" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
