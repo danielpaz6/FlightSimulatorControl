@@ -1,10 +1,12 @@
 package view;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Random;
-
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -73,8 +75,17 @@ public class MapDisplayer extends Canvas {
 		int corX = (int)(posX / widthBlock);
 		int corY = (int)(posY / heightBlock);
 		
-		redraw(max);
+		try {
+			Image img = new Image(new FileInputStream("./resources/close.png"));
+			GraphicsContext gc = getGraphicsContext2D();
+			redraw(max);
+			gc.drawImage(img, corX*widthBlock, corY*heightBlock);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		GraphicsContext gc = getGraphicsContext2D();
+		
 	}
 }
