@@ -13,6 +13,11 @@ public class MapDisplayer extends Canvas {
 	double[][] coordinates;
 	int x, y;
 	double distance;
+	double width; 
+	double height;
+	double widthBlock;
+	double heightBlock;
+	double max;
 	
 	public MapDisplayer(){
 		
@@ -24,6 +29,7 @@ public class MapDisplayer extends Canvas {
 		this.x = x;
 		this.y = y;
 		this.distance = distance;
+		this.max = max;
 		
 		redraw(max);
 	}
@@ -32,10 +38,10 @@ public class MapDisplayer extends Canvas {
 		if(coordinates != null) {
 			System.out.println("max:" + max);
 			double red = 0,green = 0;
-			double width = (double)(this.getWidth()) ;
-			double height = (double)(this.getHeight()) ;
-			double widthBlock = width / coordinates[0].length;
-			double heightBlock = height / coordinates.length;
+			width = (double)(this.getWidth()) ;
+			height = (double)(this.getHeight()) ;
+			widthBlock = width / coordinates[0].length;
+			heightBlock = height / coordinates.length;
 			
 		
 			GraphicsContext gc = getGraphicsContext2D();
@@ -62,5 +68,13 @@ public class MapDisplayer extends Canvas {
 				
 			}
 		}
+	}
+	public void markDest(double posX, double posY) {
+		int corX = (int)(posX / widthBlock);
+		int corY = (int)(posY / heightBlock);
+		
+		redraw(max);
+		
+		GraphicsContext gc = getGraphicsContext2D();
 	}
 }
