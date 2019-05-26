@@ -21,17 +21,20 @@ public class MapDisplayer extends Canvas {
 	}
 	
 	public void redraw() {
-		double width = (double)(this.getWidth()) ;
-		double height = (double)(this.getHeight()) ;
-		double widthBlock = width / coordinates[0].length;
-		double heightBlock = height / coordinates.length;
+		if(coordinates != null) {
+			double width = (double)(this.getWidth()) ;
+			double height = (double)(this.getHeight()) ;
+			double widthBlock = width / coordinates[0].length;
+			double heightBlock = height / coordinates.length;
 		
-		GraphicsContext gc = getGraphicsContext2D();
-		
-		for(int i = 0; i < coordinates.length;i++) {
-			for(int j = 0; j<coordinates[0].length; j++) {
-				gc.fillRect(i*widthBlock, j*heightBlock, widthBlock,heightBlock);
-				gc.setFill(new Color(0.0,0.0,255.0,1.0));
+			
+			GraphicsContext gc = getGraphicsContext2D();
+			
+			for(int i = 0; i < coordinates.length;i++) {
+				for(int j = 0; j<coordinates[0].length; j++) {
+					gc.fillRect(i*widthBlock, j*heightBlock, widthBlock,heightBlock);
+					gc.setFill(new Color(0.0,0.0,255.0,1.0));
+				}
 			}
 		}
 	}
