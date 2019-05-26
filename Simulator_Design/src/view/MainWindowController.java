@@ -140,6 +140,9 @@ public class MainWindowController implements Initializable, View, Observer {
 		else if(event.getSource() == btn_manual) {
 			manual_pane.toFront();
 		}
+		else if(event.getSource() == btn_map) {
+			map_pane.toFront();
+		}
 	}
 	
 	public void handleMouseEvent(MouseEvent event) {
