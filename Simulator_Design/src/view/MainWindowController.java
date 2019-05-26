@@ -314,7 +314,9 @@ public class MainWindowController implements Initializable, View, Observer {
 	}
 	
 	public void putMarkOnMap(MouseEvent e) {
-		
+		System.out.println(e.getSceneX() + " , " + e.getSceneY());
+		System.out.println(e.getX() + " , " + e.getY());
+		System.out.println(e.getScreenX() + " , " + e.getScreenY());
 	}
 	
 	public void openConnectPopUp() throws IOException {
