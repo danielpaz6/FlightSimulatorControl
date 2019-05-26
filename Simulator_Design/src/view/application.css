@@ -1,0 +1,60 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+/*
+#btn_github:hover  {
+	-fx-background-color: #efefef !important;
+}
+
+#btn_learnmore:hover {
+	-fx-background-color: #edf4ff !important;
+}*/
+
+.btn_learnmore:hover {
+	-fx-border-color: #0887d7 !important;
+	-fx-background-color: #0887d7 !important;
+}
+
+.btn_github {
+	-fx-text-fill: #18a3fa !important;
+}
+.btn_github:hover {
+	-fx-border-color: #0887d7 !important;
+	-fx-text-fill: #0887d7 !important;
+}
+
+.nav_panel JFXButton:hover {
+	-fx-background-color: #3569b6 !important;
+}
+
+/* ---------------------------------- */
+
+/* Styling the slider track */
+.jfx-slider > .track {
+     -fx-background-color: white !important;
+     -fx-pref-height: 7px;
+     -fx-pref-weight: 7px;
+     -fx-border-color: #eaeaea;
+     -fx-border-radius: 0.5em;
+}
+
+/* Styling the slider thumb */
+.jfx-slider > .thumb {
+     -fx-background-color: #07CA4D !important;
+     -fx-padding: 10px;
+}
+
+/* Styling the filled track */
+.jfx-slider > .colored-track {
+     -fx-background-color: #07CA4D !important;
+}
+
+/* Styling the animated thumb */
+.jfx-slider > .animated-thumb {
+     -fx-background-color: #07CA4D !important;
+}
+
+/* Styling the slider value text inside animated thumb */
+.jfx-slider .slider-value {
+     -fx-fill: white !important;
+     -fx-stroke: white !important;
+}

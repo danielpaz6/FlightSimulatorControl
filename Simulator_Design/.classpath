@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="src/" kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/DANIEL/Downloads/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DANIEL/Downloads/jfoenix-8.0.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DANIEL/Downloads/jar_files (1)/flowless-0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DANIEL/Downloads/jar_files (1)/reactfx-2.0-M5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DANIEL/Downloads/jar_files (1)/richtextfx-0.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DANIEL/Downloads/jar_files (1)/undofx-2.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DANIEL/Downloads/jar_files (1)/wellbehavedfx-0.3.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

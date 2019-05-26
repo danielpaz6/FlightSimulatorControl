@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
+   <children>
+      <AnchorPane prefHeight="421.0" prefWidth="247.0" style="-fx-background-color: #0747a6;" styleClass="nav_panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton fx:id="btn_dashboard" alignment="BASELINE_LEFT" layoutX="63.0" layoutY="72.0" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="185.0" text="Dashboard" textFill="WHITE">
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="VIEW_DASHBOARD" size="15.0" text="" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btn_projects" alignment="BASELINE_LEFT" layoutX="63.0" layoutY="107.0" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="185.0" text="Projects" textFill="WHITE">
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="FOLDER" size="15.0" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btn_script" alignment="BASELINE_LEFT" layoutX="63.0" layoutY="142.0" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="185.0" text="Run a script" textFill="WHITE">
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="CODE" size="15" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btn_manual" alignment="BASELINE_LEFT" layoutX="63.0" layoutY="177.0" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="185.0" text="Manual Control" textFill="WHITE">
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="MARKDOWN" size="15" />
+               </graphic>
+            </JFXButton>
+            <AnchorPane prefHeight="421.0" prefWidth="49.0" style="-fx-background-color: #07449e;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <JFXButton contentDisplay="CENTER" layoutX="9.0" layoutY="22.0" prefHeight="25.0" prefWidth="26.0" text=" ">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="HOME" size="15" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_add" contentDisplay="CENTER" layoutX="9.0" layoutY="56.0" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="26.0" text=" ">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="15" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_status" contentDisplay="CENTER" layoutX="9.0" layoutY="377.0" onAction="#handleButtonAction" onMouseExited="#handleMouseEvent" prefHeight="25.0" prefWidth="26.0" text=" " AnchorPane.bottomAnchor="19.0">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="VIEW_HEADLINE" size="15" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="options_pane" layoutX="64.0" layoutY="245.0" prefHeight="159.0" prefWidth="171.0" style="-fx-background-color: #fff; -fx-background-radius: 1em;" visible="false" AnchorPane.bottomAnchor="14.0">
+               <children>
+                  <FontAwesomeIconView fill="#0747a6" glyphName="DESKTOP" layoutX="14.0" layoutY="25.0" size="15" />
+                  <Label layoutX="8.0" layoutY="44.0" text="RECENT">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="8.0" layoutY="82.0" text="APPS">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="8.0" layoutY="113.0" text="JIRA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="8.0" layoutY="130.0" text="Bitbucket">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="61.0" text="KeepToo Swing">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="41.0" layoutY="11.0" text="Home">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <MaterialDesignIconView glyphName="BOOKMARK_OUTLINE" layoutX="35.0" layoutY="73.0" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" layoutX="-5.0" layoutY="145.0" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="91.0" layoutY="24.0" text="Flight Simulator" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="PLANE" layoutX="69.0" layoutY="40.0" size="15" />
+            <Line endX="33.33331298828125" layoutX="204.0" layoutY="52.0" startX="-136.66665649414062" stroke="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="add_pane" prefHeight="421.0" prefWidth="653.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="421.0" prefWidth="256.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <JFXButton fx:id="btn_back" layoutX="14.0" layoutY="65.0" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="49.0" style="-fx-background-radius: 10em;" text=" ">
+                     <graphic>
+                        <MaterialDesignIconView fill="#4a4a4a" glyphName="KEYBOARD_BACKSPACE" size="15.0" wrappingWidth="7.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" layoutX="96.0" layoutY="65.0" prefHeight="35.0" prefWidth="146.0" style="-fx-background-radius: 10em;" text="Issue">
+                     <graphic>
+                        <MaterialDesignIconView fill="#4a4a4a" glyphName="LABEL_OUTLINE" size="15.0" wrappingWidth="17.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" layoutX="96.0" layoutY="100.0" prefHeight="35.0" prefWidth="146.0" style="-fx-background-radius: 10em;" text="Project">
+                     <graphic>
+                        <MaterialDesignIconView fill="#4a4a4a" glyphName="FOLDER_OUTLINE" size="15.0" wrappingWidth="17.0" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="256.0" prefHeight="421.0" prefWidth="399.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="projects_pane" layoutX="253.0" prefHeight="421.0" prefWidth="399.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="27.0" layoutY="23.0" text="Projects">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField layoutX="27.0" layoutY="56.0" prefHeight="25.0" prefWidth="222.0" promptText="Search a project" />
+            <MaterialDesignIconView glyphName="MAGNIFY" layoutX="224.0" layoutY="74.0" size="15" />
+            <JFXComboBox layoutX="256.0" layoutY="56.0" prefHeight="25.0" prefWidth="97.0" />
+            <Label layoutX="27.0" layoutY="104.0" text="Name" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="352.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="170.0" layoutY="104.0" text="Type" AnchorPane.leftAnchor="170.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="287.0" layoutY="104.0" text="Owner" AnchorPane.leftAnchor="287.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Pane layoutX="23.0" layoutY="124.0" prefHeight="35.0" prefWidth="364.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0">
+               <children>
+                  <MaterialDesignIconView fill="#074495" glyphName="GOOGLE_CIRCLES_EXTENDED" layoutX="8.0" layoutY="23.0" size="15" />
+                  <Label layoutX="32.0" layoutY="10.0" text="Take off" textFill="#074495">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="10.0" text="Cessna C172p">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="285.0" layoutY="10.0" text="Daniel Paz" textFill="#074495">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <MaterialDesignIconView glyphName="ACCOUNT_CHECK" layoutX="263.0" layoutY="23.0" size="15" />
+               </children>
+            </Pane>
+            <Pane layoutX="23.0" layoutY="159.0" prefHeight="35.0" prefWidth="364.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0">
+               <children>
+                  <MaterialDesignIconView fill="#074495" glyphName="GOOGLE_CIRCLES_EXTENDED" layoutX="8.0" layoutY="23.0" size="15" />
+                  <Label layoutX="32.0" layoutY="10.0" text="Plane Wags" textFill="#074495">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="10.0" text="Cessna C172p">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="285.0" layoutY="10.0" text="Daniel Paz" textFill="#074495">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <MaterialDesignIconView glyphName="ACCOUNT_CHECK" layoutX="263.0" layoutY="23.0" size="15" />
+               </children>
+            </Pane>
+            <Pane layoutX="23.0" layoutY="194.0" prefHeight="35.0" prefWidth="364.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0">
+               <children>
+                  <MaterialDesignIconView fill="#074495" glyphName="GOOGLE_CIRCLES_EXTENDED" layoutX="8.0" layoutY="23.0" size="15" />
+                  <Label layoutX="32.0" layoutY="10.0" text="Plane Crash" textFill="#074495">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="10.0" text="Cessna C172p">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="285.0" layoutY="10.0" text="Daniel Paz" textFill="#074495">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <MaterialDesignIconView glyphName="ACCOUNT_CHECK" layoutX="263.0" layoutY="23.0" size="15" />
+               </children>
+            </Pane>
+            <Pane layoutX="23.0" layoutY="229.0" prefHeight="35.0" prefWidth="364.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0">
+               <children>
+                  <MaterialDesignIconView fill="#074495" glyphName="GOOGLE_CIRCLES_EXTENDED" layoutX="8.0" layoutY="23.0" size="15" />
+                  <Label layoutX="32.0" layoutY="10.0" text="Landing Script" textFill="#074495">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="10.0" text="Boeing 747">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="285.0" layoutY="10.0" text="Omer Nahum" textFill="#074495">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <MaterialDesignIconView glyphName="ACCOUNT_CHECK" layoutX="263.0" layoutY="23.0" size="15" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="script_pane" layoutX="242.0" prefHeight="421.0" prefWidth="410.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton fx:id="btn_loadfromfile" layoutX="23.0" layoutY="67.0" onAction="#openFile" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 0.3em; -fx-border-color: #18a3fa; -fx-border-radius: 0.3em;" styleClass="btn_learnmore" text=" Load from a file" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="FOLDER" size="11" text="" />
+               </graphic>
+            </JFXButton>
+            <Label layoutX="23.0" layoutY="30.0" text="Run a script">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <!-- <JFXTextArea layoutX="23.0" layoutY="103.0" prefHeight="238.0" prefWidth="364.0" style="-fx-border-color: #000;" />-->
+
+            <JFXButton layoutX="23.0" layoutY="356.0" onAction="#loadFromFile" prefHeight="27.0" prefWidth="78.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 0.3em; -fx-border-color: #18a3fa; -fx-border-radius: 0.3em;" styleClass="btn_learnmore" text="Run script" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </JFXButton>
+            <JFXTextArea fx:id="scriptTextArea" layoutX="23.0" layoutY="107.0" prefHeight="216.0" prefWidth="364.0" style="-fx-border-color: #000;" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="manual_pane" layoutX="452.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="28.0" layoutY="22.0" text="Manual Control">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="180.0" layoutY="76.0" text=" Aileron">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+               <graphic>
+                  <OctIconView glyphName="ARROW_LEFT" size="15.0" />
+               </graphic>
+            </Label>
+            <OctIconView glyphName="ARROW_RIGHT" layoutX="251.0" layoutY="92.0" size="15" />
+            <Label layoutX="320.0" layoutY="206.0" style="-fx-rotate: 90;" text=" Elevator">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+               <graphic>
+                  <OctIconView glyphName="ARROW_LEFT" size="15.0" />
+               </graphic>
+            </Label>
+            <OctIconView glyphName="ARROW_RIGHT" layoutX="350.0" layoutY="267.0" size="15" style="-fx-rotate: 90;" />
+            <AnchorPane fx:id="joystickAnchor" layoutX="110.0" layoutY="110.0" prefHeight="110.0" prefWidth="110.0">
+               <children>
+                  <Circle fx:id="outerjoystick" fill="WHITE" layoutX="124.0" layoutY="108.0" onMouseDragged="#dragable" onMousePressed="#dragable" onMouseReleased="#dragable_exit" radius="108.0" stroke="#0747a6" strokeType="INSIDE" strokeWidth="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Circle fx:id="btn_joystick" fill="#0e59c3" layoutX="108.0" layoutY="108.0" onMouseDragged="#dragable" onMousePressed="#dragable" onMouseReleased="#dragable_exit" radius="38.0" stroke="#0747a6" strokeType="INSIDE">
+                     <effect>
+                        <DropShadow color="#cfcfcf" height="5.0" offsetX="3.0" offsetY="3.0" radius="2.0" spread="0.28" width="5.0" />
+                     </effect>
+                  </Circle>
+               </children>
+            </AnchorPane>
+            <Label layoutX="4.0" layoutY="215.0" rotate="-90.0" text="Throttle">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="342.0" layoutY="360.0" text="Rudder">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Label>
+            <JFXSlider fx:id="rudderSlider" blockIncrement="0.01" layoutX="106.0" layoutY="362.0" max="1.0" min="-1.0" onMouseDragged="#rudderDrag" prefHeight="14.0" prefWidth="222.0" style="-fx-text-fill: #0747a6;" styleClass="jfx-slider" value="0.01" />
+            <JFXSlider fx:id="throttleSlider" blockIncrement="0.01" layoutX="47.0" layoutY="116.0" max="1.0" onMouseDragged="#throttleDrag" orientation="VERTICAL" prefHeight="216.0" prefWidth="31.0" style="-fx-text-fill: #0747a6;" styleClass="jfx-slider" value="0.01" />
+            <Label layoutX="106.0" layoutY="382.0" text="Left" />
+            <Label layoutX="202.0" layoutY="382.0" text="Center" />
+            <Label layoutX="297.0" layoutY="382.0" text="Right" />
+            <AnchorPane fx:id="connectSim_pane" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <Label layoutX="43.0" layoutY="23.0" text="You must be connected to the Flight Simulator in order" />
+                  <Label layoutX="43.0" layoutY="40.0" text="to use the Manual Control panel." />
+                  <JFXButton fx:id="btn_connectSim" layoutX="43.0" layoutY="93.0" onAction="#openConnectPopUp" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 0.5em; -fx-border-color: #18a3fa; -fx-border-radius: 0.5em;" styleClass="btn_learnmore" text="Connect to the Simulator" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="dashboard_pane" layoutX="247.0" prefHeight="421.0" prefWidth="410.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="30.0" layoutY="60.0" prefHeight="173.0" prefWidth="356.0" style="-fx-border-color: #cdcdcd;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+               <children>
+                  <Pane layoutY="2.0" prefHeight="3.0" prefWidth="358.0" style="-fx-background-color: #0747a6; -fx-background-radius: 2em;" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
+                  <Label layoutX="15.0" layoutY="12.0" text="Introduction" textFill="#282828">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="27.0" layoutY="41.0" text="Welcome to Flight Controller" textFill="#282828">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <FontAwesomeIconView fill="#0747a6" glyphName="XING" layoutX="27.0" layoutY="120.0" size="50" />
+                  <FontAwesomeIconView glyphName="ELLIPSIS_H" layoutX="331.0" layoutY="18.0" size="10" AnchorPane.rightAnchor="12.285714149475098" />
+                  <Label layoutX="92.0" layoutY="76.0" text="Not sure what to do? Click here to learn more" textFill="#282828">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="btn_learnmore" layoutX="91.0" layoutY="115.0" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 5em; -fx-border-color: #18a3fa; -fx-border-radius: 5em;" styleClass="btn_learnmore" text="Learn More" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font></JFXButton>
+                  <JFXButton fx:id="btn_github" layoutX="208.0" layoutY="115.0" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #fff; -fx-background-radius: 5em; -fx-border-color: #cccbcb; -fx-border-radius: 5em;" styleClass="btn_github" text=" My Github" textFill="#18a3fa">
+                     <graphic>
+                        <OctIconView />
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <Label layoutX="30.0" layoutY="25.0" text="System Dashboard" textFill="#282828">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="27.0" layoutY="253.0" prefHeight="111.0" prefWidth="356.0" style="-fx-border-color: #cdcdcd;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+               <children>
+                  <Pane layoutY="2.0" prefHeight="3.0" prefWidth="358.0" style="-fx-background-color: #0747a6; -fx-background-radius: 2em;" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
+                  <Label layoutX="15.0" layoutY="12.0" text="Assigned to Me" textFill="#282828">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="40.0" layoutY="46.0" text="You have no issues assigned to you." textFill="#282828">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <FontAwesomeIconView glyphName="ELLIPSIS_H" layoutX="332.0" layoutY="18.0" size="10" AnchorPane.rightAnchor="12.285714149475098" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="31.0" layoutY="389.0" text="Last time online: 25/04/2019" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="31.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
