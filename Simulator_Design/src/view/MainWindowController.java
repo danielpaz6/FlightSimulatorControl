@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -70,6 +71,10 @@ public class MainWindowController implements Initializable, View, Observer {
 	@FXML
 	private JFXTextArea scriptTextArea;
 	
+	// Map
+	@FXML
+	private MapDisplayer mapDisplayer;
+	
 	// Data Members
 	
 	private double radius = 0;
@@ -106,6 +111,7 @@ public class MainWindowController implements Initializable, View, Observer {
 		initializedCenterX = btn_joystick.getLayoutX();
 		initializedCenterY = btn_joystick.getLayoutY();
 		
+		mapDisplayer.setMapData(null, 0); // map initialized to null ( white blocks ) 
 		
 		System.out.println(initializedCenterX + "," + initializedCenterY);
 	}
@@ -273,12 +279,27 @@ public class MainWindowController implements Initializable, View, Observer {
 				String getTextFromFile = s.useDelimiter("\\A").next().trim();
 				String[] rows = getTextFromFile.split("\n");
 				
-				int numOfRows = rows.length;
-				int numOfColums = (rows[0].split(",")).length;
+				int x = Integer.parseInt((rows[0].split(","))[0]);
+				int y = Integer.parseInt((rows[0].split(","))[1]);
+				double distance = Double.parseDouble(rows[1]);
 				
+				int numOfRows = rows.length - 2;
+				int numOfColums = (rows[2].split(",")).length;
 				
+				double[][] coords = new double[numOfRows][numOfColums];
+				double max = 0;
 				
-				
+				for(int i = 2; i < numOfRows; i++) {
+					String[] colums = rows[i].split(",");
+					for(int j = 0; j < numOfColums; j++) {
+						coords[i][j] = Double.parseDouble(colums[j]);
+						
+						if(coords[i][j] > max)
+							max = coords[i][j];
+					}
+				}
+						
+				mapDisplayer.setMapData(coords, max, x, y, distance);
 				
 				
 			} catch (FileNotFoundException e) {
