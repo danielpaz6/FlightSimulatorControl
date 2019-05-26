@@ -258,6 +258,35 @@ public class MainWindowController implements Initializable, View, Observer {
 		}
 	}
 	
+	public void loadMap() {
+		FileChooser fc = new FileChooser();
+		fc.setTitle("Choose a CSV map file.");
+		fc.setInitialDirectory(new File("./"));
+		
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+		fc.getExtensionFilters().add(extFilter);
+
+		File chosen = fc.showOpenDialog(null);
+		if(chosen != null) {
+			try {
+				Scanner s = new Scanner(chosen);
+				String getTextFromFile = s.useDelimiter("\\A").next().trim();
+				String[] rows = getTextFromFile.split("\n");
+				
+				int numOfRows = rows.length;
+				int numOfColums = (rows[0].split(",")).length;
+				
+				
+				
+				
+				
+				
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void openConnectPopUp() throws IOException {
 		//FXMLLoader fxl = new FXMLLoader();
 		
