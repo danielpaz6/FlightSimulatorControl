@@ -56,7 +56,7 @@ public class MainWindowController implements Initializable, View, Observer {
 	private AnchorPane add_pane, options_pane, dashboard_pane, projects_pane, script_pane, manual_pane,map_pane;
 	
 	@FXML
-	private AnchorPane connectSim_pane;
+	private AnchorPane connectSim_pane,connectSim_pane2;
 	
 	// Joystick components
 	@FXML
@@ -290,11 +290,11 @@ public class MainWindowController implements Initializable, View, Observer {
 		{
 			if(arg.equals("done_closePopUp")) {
 				connectSim_pane.setVisible(false);
-				map_pane.setVisible(false);
+				connectSim_pane2.setVisible(false);
 			}
 			else if(arg.equals("setVisibleTrue_to_ConnectAnchorPane")) {
 				connectSim_pane.setVisible(true);
-				map_pane.setVisible(true);
+				connectSim_pane2.setVisible(true);
 			}
 		}
 		
