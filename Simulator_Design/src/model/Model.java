@@ -6,11 +6,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.List;
 import java.util.Observable;
 
 import algorithms.BestFirstSearch;
 import algorithms.MatrixProblem;
 import algorithms.Position;
+import algorithms.State;
 import interpreter.Interpreter;
 import interpreter.Server;
 import server.Client;
@@ -194,6 +196,12 @@ public class Model extends Observable implements SimModel {
 	public void runScript(String text) {
 		interpreter = new Interpreter(server);
 		interpreter.start(text);
+	}
+
+	@Override
+	public List<State<Position>> getMapPath() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
