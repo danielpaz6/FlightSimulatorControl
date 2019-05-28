@@ -57,7 +57,7 @@ public class ViewModel extends Observable implements Observer {
 	
 	public void connectToMapSolver() {
 		try {
-			model.connectToMapServer(text_ip.get(), Double.parseDouble(text_port.get()));
+			model.connectToMapServer(text_ip.get(), Double.parseDouble(text_port.get()), mapCoordinateString.get());
 		}
 		// Probably because text_port.get() = null and can't be parsed to Double
 		catch(Exception e) {
