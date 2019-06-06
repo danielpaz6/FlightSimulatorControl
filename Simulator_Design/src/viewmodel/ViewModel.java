@@ -5,8 +5,10 @@ import java.util.Observer;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.SimModel;
@@ -27,6 +29,10 @@ public class ViewModel extends Observable implements Observer {
 	// Map String
 	public StringProperty mapCoordinateString;
 	
+	public IntegerProperty planeCordX, planeCordY;
+	public IntegerProperty destCordX, destCordY;
+	
+	
 	
 	public ViewModel(SimModel model) {
 		this.model = model;
@@ -42,6 +48,11 @@ public class ViewModel extends Observable implements Observer {
 		scriptText = new SimpleStringProperty();
 		
 		mapCoordinateString = new SimpleStringProperty();
+		
+		planeCordX = new SimpleIntegerProperty();
+		planeCordY = new SimpleIntegerProperty();
+		destCordX = new SimpleIntegerProperty();
+		destCordY = new SimpleIntegerProperty();
 	}
 	
 	public void connectToSim()
@@ -57,7 +68,7 @@ public class ViewModel extends Observable implements Observer {
 	
 	public void connectToMapSolver() {
 		try {
-			model.connectToMapServer(text_ip.get(), Double.parseDouble(text_port.get()), mapCoordinateString.get());
+			model.connectToMapServer(text_ip.get(),Double.parseDouble(text_port.get()));
 		}
 		// Probably because text_port.get() = null and can't be parsed to Double
 		catch(Exception e) {
@@ -80,6 +91,10 @@ public class ViewModel extends Observable implements Observer {
 	
 	public void loadFromFile() {
 		model.runScript(scriptText.get());
+	}
+	
+	public void calculateMap() {
+		model.calculateMap(this.mapCoordinateString.get(),this.planeCordX.get(),this.planeCordY.get(),this.destCordX.get(),this.destCordY.get());
 	}
 	
 	@Override

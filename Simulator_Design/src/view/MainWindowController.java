@@ -92,13 +92,18 @@ public class MainWindowController implements Initializable, View, Observer {
 	// Map Data Members
 	
 	private double maxMapPlane;
-	private double planeCordX, planeCordY;
-	
+	DoubleProperty planeCordX, planeCordY;
+	DoubleProperty destCordX, destCordY;
 	
 	public MainWindowController() {
 		aileron = new SimpleDoubleProperty();
 		elevator = new SimpleDoubleProperty();
 		getTextFromFile = new SimpleStringProperty();
+		planeCordX = new SimpleDoubleProperty();
+		planeCordY = new SimpleDoubleProperty();
+		destCordX = new SimpleDoubleProperty();
+		destCordY = new SimpleDoubleProperty();
+		
 	}
 	
 	@Override
@@ -115,6 +120,11 @@ public class MainWindowController implements Initializable, View, Observer {
 		viewModel.scriptText.bind(scriptTextArea.textProperty());
 		
 		viewModel.mapCoordinateString.bind(getTextFromFile);
+		
+		viewModel.planeCordX.bind(this.planeCordX);
+		viewModel.planeCordY.bind(this.planeCordY);
+		viewModel.destCordX.bind(this.destCordX);
+		viewModel.destCordY.bind(this.destCordY);
 	}
 	
 	@Override
@@ -315,8 +325,8 @@ public class MainWindowController implements Initializable, View, Observer {
 				}
 				
 				maxMapPlane = max;
-				planeCordX = corX;
-				planeCordY = corY;
+				planeCordX.set(corX);
+				planeCordY.set(corY);
 				
 				mapDisplayer.setMapData(coords, max, corX, corY, distance);
 				mapDisplayer.redraw(max);
@@ -334,7 +344,7 @@ public class MainWindowController implements Initializable, View, Observer {
 		double posY = e.getY();
 		
 		mapDisplayer.redraw(maxMapPlane);
-		mapDisplayer.movePlane(planeCordX, planeCordY);
+		mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
 		mapDisplayer.markDest(posX,posY);
 		
 		

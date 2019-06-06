@@ -4,6 +4,9 @@ package view;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Random;
+
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Observable;
 
@@ -26,6 +27,10 @@ public class Model extends Observable implements SimModel {
 	MySerialServer mapServer; // Map Problem Solver Server
 	Thread checkConnection;
 	Interpreter interpreter;
+	//Map ip and port details.
+	String mapServerIp;
+	int mapServerPort;
+	
 	
 	public Model(Server server) {
 		this.server = server;
@@ -156,7 +161,7 @@ public class Model extends Observable implements SimModel {
 		
 	}
 	
-	public void connectToMapServer(String ip, double port, String mapText) {
+	public void connectToMapServer(String ip, double port) {
 		mapServer = new MySerialServer((int)port); 
 		
 		try {
@@ -170,23 +175,13 @@ public class Model extends Observable implements SimModel {
 			mapServer.start(ch, "end"); // running the server
 			
 			// Starting the Client
-			Socket s=null;
-			PrintWriter out=null;
-			BufferedReader in=null;
-			s = new Socket(ip, (int)port);
-			s.setSoTimeout(3000);
-			out=new PrintWriter(s.getOutputStream());
-			in=new BufferedReader(new InputStreamReader(s.getInputStream()));
-			
-			
-			
 			//out.print(matrix[i][j]+",");
 			
 			setChanged();
 			notifyObservers("connectToMapServer_success");
 		} catch (Exception e) {
 			
-			server.client = null;
+			mapServer = null;
 			setChanged();
 			notifyObservers("connectToMapServer_failed");
 		}
@@ -204,4 +199,39 @@ public class Model extends Observable implements SimModel {
 		return null;
 	}
 
+	public void calculateMap(String mapCor, int planeX, int planeY, int destX, int destY  ) {
+		
+		Socket s=null;
+		PrintWriter out=null;
+		BufferedReader in=null;
+		try {
+			s = new Socket(mapServerIp, mapServerPort);
+			s.setSoTimeout(3000);
+			out=new PrintWriter(s.getOutputStream());
+			in=new BufferedReader(new InputStreamReader(s.getInputStream()));
+			String[] rows = mapCor.split("\n");
+			int rLen = rows.length - 2;
+			for(int i = 2; i< rLen; i++) {
+				out.println(rows[i]);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			out.println("end");
+			out.println(planeX + "," + planeY);
+			out.println(destX + "," + destY);
+			out.flush();
+			
+			String sol = in.readLine();
+			System.out.println(sol);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
