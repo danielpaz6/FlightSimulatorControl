@@ -89,6 +89,11 @@ public class MainWindowController implements Initializable, View, Observer {
 	public DoubleProperty aileron, elevator;
 	public StringProperty getTextFromFile;
 	
+	// Map Data Members
+	
+	private double maxMapPlane;
+	private double planeCordX, planeCordY;
+	
 	
 	public MainWindowController() {
 		aileron = new SimpleDoubleProperty();
@@ -117,7 +122,7 @@ public class MainWindowController implements Initializable, View, Observer {
 		initializedCenterX = btn_joystick.getLayoutX();
 		initializedCenterY = btn_joystick.getLayoutY();
 		
-		mapDisplayer.setMapData(null, 0, 0, 0, 0); // map initialized to null ( white blocks ) 
+		//mapDisplayer.setMapData(null, 0, 0, 0, 0); // map initialized to null ( white blocks ) 
 		
 		System.out.println(initializedCenterX + "," + initializedCenterY);
 	}
@@ -309,9 +314,13 @@ public class MainWindowController implements Initializable, View, Observer {
 					}
 				}
 				
+				maxMapPlane = max;
+				planeCordX = corX;
+				planeCordY = corY;
 				
 				mapDisplayer.setMapData(coords, max, corX, corY, distance);
-				
+				mapDisplayer.redraw(max);
+				mapDisplayer.movePlane(corX, corY);
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -324,6 +333,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		double posX = e.getX();
 		double posY = e.getY();
 		
+		mapDisplayer.redraw(maxMapPlane);
+		mapDisplayer.movePlane(planeCordX, planeCordY);
 		mapDisplayer.markDest(posX,posY);
 		
 		

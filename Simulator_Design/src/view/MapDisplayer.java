@@ -7,6 +7,7 @@ import java.util.Random;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -20,26 +21,30 @@ public class MapDisplayer extends Canvas {
 	double widthBlock;
 	double heightBlock;
 	double max;
-	double markedX, markedY;
+	double destX, destY; // position of plane dest
+	double planeX, planeY; // position of plane.
+	
+	boolean isMarkedOnMap;
 	
 	public MapDisplayer(){
-		
+		isMarkedOnMap = false;
 		//redraw();
 	}
 	
 	public void setMapData(double[][] coordinates, double max, int x, int y, double distance) {
 		this.coordinates = coordinates;
-		this.x = x;
-		this.y = y;
+		this.planeX = x;
+		this.planeY = y;
 		this.distance = distance;
 		this.max = max;
 		
-		redraw(max);
+		//redraw(max);
+		//movePlane(x, y); // movePlane also redraw
+		System.out.println("we entered setMapData()");
 	}
 	
 	public void redraw(double max) {
 		if(coordinates != null) {
-			System.out.println("max:" + max);
 			double red = 0,green = 0;
 			width = (double)(this.getWidth()) ;
 			height = (double)(this.getHeight()) ;
@@ -72,17 +77,38 @@ public class MapDisplayer extends Canvas {
 			}
 		}
 	}
-	public void markDest(double posX, double posY) {
+	
+	public void movePlane(double posX, double posY) {
 		int corX = (int)(posX / widthBlock);
 		int corY = (int)(posY / heightBlock);
-		markedX = corX;
-		markedY = corY;
+		planeX = corX;
+		planeY = corY;
+		
+		try {
+			Image img = new Image(new FileInputStream("./resources/plane.png"));
+			GraphicsContext gc = getGraphicsContext2D();
+			//redraw(max); // redraw the map
+			gc.drawImage(img, corX*widthBlock, corY*heightBlock); // draw plane
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void markDest(double posX, double posY) {
+		isMarkedOnMap = true;
+		int corX = (int)(posX / widthBlock);
+		int corY = (int)(posY / heightBlock);
+		destX = corX;
+		destY = corY;
 		
 		try {
 			Image img = new Image(new FileInputStream("./resources/close.png"));
 			GraphicsContext gc = getGraphicsContext2D();
-			redraw(max);
-			gc.drawImage(img, corX*widthBlock + 7, corY*heightBlock + 7);
+			//redraw(max); // redraw the map
+			movePlane(planeX, planeY); // redraw the plane location
+			gc.drawImage(img, corX*widthBlock, corY*heightBlock); // draw the dest
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -90,5 +116,9 @@ public class MapDisplayer extends Canvas {
 		}
 		
 		
+	}
+	
+	public void putMarkOnMap(MouseEvent e) {
+		System.out.println("test");
 	}
 }
