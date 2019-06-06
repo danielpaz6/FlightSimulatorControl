@@ -27,9 +27,13 @@ public class Model extends Observable implements SimModel {
 	MySerialServer mapServer; // Map Problem Solver Server
 	Thread checkConnection;
 	Interpreter interpreter;
+	
 	//Map ip and port details.
 	String mapServerIp;
 	int mapServerPort;
+	
+	// Default Map Solver IP
+	int mapSolverIP = 6420;
 	
 	
 	public Model(Server server) {
@@ -161,30 +165,40 @@ public class Model extends Observable implements SimModel {
 		
 	}
 	
-	public void connectToMapServer(String ip, double port) {
-		mapServer = new MySerialServer((int)port); 
+	@Override
+	public void connectToMapServer(String ip, double port, String mapCor, int planeX, int planeY, int destX,
+	int destY) {
+		mapServerIp = ip;
+		mapServerPort = (int)port;
 		
-		try {
+		mapServer = new MySerialServer(mapSolverIP); 
+		
+		// Starting the Map Solver Server in new thread
+		new Thread(()-> {
+			try {
+				SearchableClientHandler<String, Position> ch;
+				ch = new SearchableClientHandler<>(
+						new SearcherSolver<MatrixProblem, String, Position>(new BestFirstSearch<Position>()),
+						new FileCacheManager<MatrixProblem, String>("./maze.xml")
+				);
+				
+				mapServer.start(ch, "end"); // running the server
+			} catch (Exception e) {
+				mapServer = null;
+				setChanged();
+				notifyObservers("connectToMapServer_failed");
+			}
 			
-			// Starting the Server
-			SearchableClientHandler<String, Position> ch = new SearchableClientHandler<>(
-					new SearcherSolver<MatrixProblem, String, Position>(new BestFirstSearch<Position>()),
-					new FileCacheManager<MatrixProblem, String>("./maze.xml")
-			);
-			
-			mapServer.start(ch, "end"); // running the server
-			
-			// Starting the Client
-			//out.print(matrix[i][j]+",");
-			
-			setChanged();
-			notifyObservers("connectToMapServer_success");
-		} catch (Exception e) {
-			
-			mapServer = null;
-			setChanged();
-			notifyObservers("connectToMapServer_failed");
-		}
+		}).start();
+		
+
+		setChanged();
+		notifyObservers("connectToMapServer_success");
+		
+		
+		// Connecting as client to the Map Server Solver 
+		calculateMap(mapCor, planeX, planeY, destX, destY);
+		
 	}
 	
 	@Override
@@ -199,7 +213,7 @@ public class Model extends Observable implements SimModel {
 		return null;
 	}
 
-	public void calculateMap(String mapCor, int planeX, int planeY, int destX, int destY  ) {
+	public void calculateMap(String mapCor, int planeX, int planeY, int destX, int destY) {
 		
 		Socket s=null;
 		PrintWriter out=null;
@@ -227,6 +241,10 @@ public class Model extends Observable implements SimModel {
 			
 			String sol = in.readLine();
 			System.out.println(sol);
+			
+			out.close();
+			in.close();
+			s.close();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

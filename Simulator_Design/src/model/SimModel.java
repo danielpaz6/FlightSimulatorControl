@@ -23,7 +23,7 @@ public interface SimModel {
 	public void connectToServer(String ip, double port); // Connecting to the Simulator as a client
 	
 	// Map Methods
-	public void connectToMapServer(String ip, double port);// Getting solution from Server
+	public void connectToMapServer(String ip, double port, String mapCor, int planeX, int planeY, int destX, int destY); // Getting solution from Server
 	public void calculateMap(String mapCor, int planeX, int planeY, int destX, int destY);
 	public List<State<Position>> getMapPath();
 	

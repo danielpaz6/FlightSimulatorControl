@@ -367,6 +367,23 @@ public class MainWindowController implements Initializable, View, Observer {
 		viewModel.addObserver(mwc);
 	}
 	
+	public void openConnectMapPopUp() throws IOException {
+		//FXMLLoader fxl = new FXMLLoader();
+		
+		FXMLLoader fxl = new FXMLLoader(getClass().getResource("MapPopUpWindow.fxml"));
+		AnchorPane root = (AnchorPane)fxl.load();
+		
+		Scene scene = new Scene(root,250,260);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		MapPopUpController mwc= fxl.getController();
+		mwc.setViewModel(viewModel);
+		viewModel.addObserver(mwc);
+	}
+	
 	public void throttleDrag() {
 		viewModel.updateThrottle();
 	}

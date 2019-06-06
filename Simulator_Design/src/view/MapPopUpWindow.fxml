@@ -11,7 +11,7 @@
    <children>
       <AnchorPane prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: #0747a6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="59.0" layoutY="16.0" text=" Connect to Map Solver" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" text="Connect to Map Solver" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>

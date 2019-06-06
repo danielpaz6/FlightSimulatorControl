@@ -419,7 +419,7 @@
                </font>
             </Label>
             <Label layoutX="28.0" layoutY="66.0" text="In order to use the Surface Map Vision, you must" />
-            <Label layoutX="28.0" layoutY="90.0" text="load a CSV file from your local computer." />
+            <Label layoutX="28.0" layoutY="90.0" text="load a CSV file from your local computer.2" />
             <MapDisplayer fx:id="mapDisplayer" onMouseClicked="#putMarkOnMap" height="200.0" layoutX="28.0" layoutY="122.0" width="350.0" />
             <JFXButton layoutX="28.0" layoutY="351.0" onAction="#loadMap" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 0.5em; -fx-border-color: #18a3fa; -fx-border-radius: 0.5em;" styleClass="btn_learnmore" text="Load Map" textFill="WHITE">
                <cursor>
@@ -429,7 +429,7 @@
                   <Font name="System Bold" size="10.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btn_connectSim211" layoutX="137.0" layoutY="351.0" onAction="#openConnectPopUp" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 0.5em; -fx-border-color: #18a3fa; -fx-border-radius: 0.5em;" styleClass="btn_learnmore" text="Calculate Path" textFill="WHITE">
+            <JFXButton fx:id="btn_connectSim211" layoutX="137.0" layoutY="351.0" onAction="#openConnectPopUp" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 0.5em; -fx-border-color: #18a3fa; -fx-border-radius: 0.5em;" styleClass="btn_learnmore" text="Calculate Path2" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
