@@ -140,7 +140,6 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-			
 			// Initializes the Server Variable that includes the Command List and Simulator variables. 
 			CommandFactory<Command> exp = new CommandFactory<>();
 			Server server = new Server(exp, () -> {
