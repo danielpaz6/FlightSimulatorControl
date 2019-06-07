@@ -30,7 +30,9 @@ public class ViewModel extends Observable implements Observer {
 	public StringProperty mapCoordinateString;
 	
 	public IntegerProperty planeCordX, planeCordY;
-	public IntegerProperty destCordX, destCordY;
+	public IntegerProperty destCordX, destCordY;\
+	
+	public StringProperty mapPathSol; 
 	
 	
 	
@@ -53,6 +55,8 @@ public class ViewModel extends Observable implements Observer {
 		planeCordY = new SimpleIntegerProperty();
 		destCordX = new SimpleIntegerProperty();
 		destCordY = new SimpleIntegerProperty();
+		
+		mapPathSol = new SimpleStringProperty();
 	}
 	
 	public void connectToSim()
@@ -117,7 +121,11 @@ public class ViewModel extends Observable implements Observer {
 				// in that case, we'll notify the View that he needs setVisible the "you must connect to simulator" AnchorPane.
 				setChanged();
 				notifyObservers("setVisibleTrue_to_ConnectAnchorPane");
-				
+			}
+			else if(arg.equals("done map calculate")) {
+				mapPathSol.set(model.getPath());
+				setChanged();
+				notifyObservers("done map calculate");
 			}
 		}
 	}

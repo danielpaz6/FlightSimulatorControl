@@ -9,6 +9,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.CompletableFuture;
 
 import algorithms.BestFirstSearch;
 import algorithms.MatrixProblem;
@@ -34,6 +35,8 @@ public class Model extends Observable implements SimModel {
 	
 	// Default Map Solver IP
 	int mapSolverIP = 6420;
+	
+	String mapPathSol;
 	
 	
 	public Model(Server server) {
@@ -247,10 +250,14 @@ public class Model extends Observable implements SimModel {
 			out.println(destX + "," + destY);
 			out.flush();
 			
-			String sol = in.readLine();
-			System.out.println("sol: " + sol);
+			CompletableFuture.supplyAsync(() -> {return in.readLine();})
+			.thenAccept(answer -> {
+				
+				mapPathSol = answer;
+				setChanged();
+				notifyObservers("done map calculate");
+			});
 			
-			System.out.println("done");
 			out.close();
 			in.close();
 			s.close();
@@ -262,5 +269,11 @@ public class Model extends Observable implements SimModel {
 			notifyObservers("connectToMapServer_failed");
 		}
 		
+	}
+
+	@Override
+	public String getPath() {
+		
+		return this.mapPathSol;
 	}
 }

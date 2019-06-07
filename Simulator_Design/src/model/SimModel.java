@@ -25,8 +25,7 @@ public interface SimModel {
 	// Map Methods
 	public void connectToMapServer(String ip, double port, String mapCor, int planeX, int planeY, int destX, int destY); // Getting solution from Server
 	public void calculateMap(String mapCor, int planeX, int planeY, int destX, int destY);
-	public List<State<Position>> getMapPath();
-	
+	public String getPath();	
 	// Run a script Methods
 	public void runScript(String text);
 }

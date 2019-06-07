@@ -97,6 +97,8 @@ public class MainWindowController implements Initializable, View, Observer {
 	IntegerProperty planeCordX, planeCordY;
 	IntegerProperty destCordX, destCordY;
 	
+	public StringProperty mapPathSol;
+	
 	public MainWindowController() {
 		aileron = new SimpleDoubleProperty();
 		elevator = new SimpleDoubleProperty();
@@ -105,6 +107,7 @@ public class MainWindowController implements Initializable, View, Observer {
 		planeCordY = new SimpleIntegerProperty();
 		destCordX = new SimpleIntegerProperty();
 		destCordY = new SimpleIntegerProperty();
+		mapPathSol = new SimpleStringProperty();
 		
 	}
 	
@@ -127,6 +130,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		viewModel.planeCordY.bind(this.planeCordY);
 		viewModel.destCordX.bind(this.destCordX);
 		viewModel.destCordY.bind(this.destCordY);
+		
+		this.mapPathSol.bind(viewModel.mapPathSol);
 	}
 	
 	@Override
@@ -414,6 +419,13 @@ public class MainWindowController implements Initializable, View, Observer {
 			else if(arg.equals("setVisibleTrue_to_ConnectAnchorPane")) {
 				connectSim_pane.setVisible(true);
 				connectSim_pane2.setVisible(true);
+			}
+			else if(arg.equals("done map calculate")) {
+				
+				mapDisplayer.redraw(maxMapPlane);
+				mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
+				mapDisplayer.markDest(destCordX.get(),destCordY.get());
+				mapDisplayer.drawPath(mapPathSol.get());
 			}
 		}
 		

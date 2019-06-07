@@ -3,6 +3,7 @@ package view;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Random;
 
 import javafx.beans.property.DoubleProperty;
@@ -124,5 +125,20 @@ public class MapDisplayer extends Canvas {
 	
 	public void putMarkOnMap(MouseEvent e) {
 		System.out.println("test");
+	}
+	
+	public void drawPath(String path) {
+		
+		String[] mapPath = path.split(",");
+		GraphicsContext gc = getGraphicsContext2D();
+		int posX = planeX, posY = planeY;
+		for (String direction : mapPath) {
+			
+			if(direction.equals("right")) {
+				++posX;
+				gc.fillRect(posX * widthBlock, posY * heightBlock, widthBlock/2, heightBlock/4);
+			}
+			
+		}
 	}
 }
