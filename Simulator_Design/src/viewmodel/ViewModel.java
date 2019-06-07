@@ -16,9 +16,9 @@ import model.SimModel;
 public class ViewModel extends Observable implements Observer {
 	SimModel model;
 	
-	// Connect Pop-up Window
+	// Connect Pop-up Window & Map Pop-up Window
 	public StringProperty text_ip, text_port;
-	public BooleanProperty connect_result;
+	public BooleanProperty connect_result, connectMap_result;
 	
 	// Manual variables
 	public DoubleProperty aileron, elevator, throttle, rudder;
@@ -107,6 +107,9 @@ public class ViewModel extends Observable implements Observer {
 			}
 			else if(arg.equals("connectToServer_failed")) {
 				// will pop up message: Sorry! couldn't connect to the Simulator
+				connect_result.set(true); // change the visible to True
+			}
+			else if(arg.equals("connectToMapServer_failed")) {
 				connect_result.set(true); // change the visible to True
 			}
 			else if(arg.equals("Disconnected_from_client")) {

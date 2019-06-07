@@ -18,7 +18,9 @@ import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -92,17 +94,17 @@ public class MainWindowController implements Initializable, View, Observer {
 	// Map Data Members
 	
 	private double maxMapPlane;
-	DoubleProperty planeCordX, planeCordY;
-	DoubleProperty destCordX, destCordY;
+	IntegerProperty planeCordX, planeCordY;
+	IntegerProperty destCordX, destCordY;
 	
 	public MainWindowController() {
 		aileron = new SimpleDoubleProperty();
 		elevator = new SimpleDoubleProperty();
 		getTextFromFile = new SimpleStringProperty();
-		planeCordX = new SimpleDoubleProperty();
-		planeCordY = new SimpleDoubleProperty();
-		destCordX = new SimpleDoubleProperty();
-		destCordY = new SimpleDoubleProperty();
+		planeCordX = new SimpleIntegerProperty();
+		planeCordY = new SimpleIntegerProperty();
+		destCordX = new SimpleIntegerProperty();
+		destCordY = new SimpleIntegerProperty();
 		
 	}
 	
@@ -347,7 +349,12 @@ public class MainWindowController implements Initializable, View, Observer {
 		mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
 		mapDisplayer.markDest(posX,posY);
 		
+		// Data binding the MarkOn sign to the View Model.
+		destCordX.set(mapDisplayer.destX);
+		destCordY.set(mapDisplayer.destY);
 		
+		// Once picked new destination, we'll call re-calculate the path to the dest.
+		viewModel.calculateMap();
 	}
 	
 	public void openConnectPopUp() throws IOException {

@@ -24,8 +24,8 @@ public class MapDisplayer extends Canvas {
 	double widthBlock;
 	double heightBlock;
 	double max;
-	double destX, destY; // position of plane dest
-	double planeX, planeY; // position of plane.
+	int destX, destY; // position of plane dest
+	int planeX, planeY; // position of plane.
 	
 	boolean isMarkedOnMap;
 	
@@ -103,8 +103,11 @@ public class MapDisplayer extends Canvas {
 		isMarkedOnMap = true;
 		int corX = (int)(posX / widthBlock);
 		int corY = (int)(posY / heightBlock);
-		destX = corX;
-		destY = corY;
+		
+		// It's opposite from corX and corY because the (0,0) is top left
+		// and the width means columns and height means rows.
+		destX = corY;
+		destY = corX;
 		
 		try {
 			Image img = new Image(new FileInputStream("./resources/close.png"));
@@ -117,8 +120,6 @@ public class MapDisplayer extends Canvas {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	public void putMarkOnMap(MouseEvent e) {

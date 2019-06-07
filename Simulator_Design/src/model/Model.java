@@ -220,35 +220,46 @@ public class Model extends Observable implements SimModel {
 		BufferedReader in=null;
 		try {
 			s = new Socket(mapServerIp, mapServerPort);
+			
+			// If we passed this line, it means we logged in to Map Server.
+			setChanged();
+			notifyObservers("connectToServer_success");
+			
+			
 			s.setSoTimeout(3000);
 			out=new PrintWriter(s.getOutputStream());
 			in=new BufferedReader(new InputStreamReader(s.getInputStream()));
+			//System.out.println(mapCor);
+			//System.out.println("-------------");
 			String[] rows = mapCor.split("\n");
-			int rLen = rows.length - 2;
-			for(int i = 2; i< rLen; i++) {
-				out.println(rows[i]);
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+
+			for(int i = 2; i < rows.length; i++) {
+				//System.out.println(rows[i].trim());
+				out.println(rows[i].trim());
+				
+				out.flush();
 			}
 			out.println("end");
+			out.flush();
+			
 			out.println(planeX + "," + planeY);
+			out.flush();
 			out.println(destX + "," + destY);
 			out.flush();
 			
 			String sol = in.readLine();
-			System.out.println(sol);
+			System.out.println("sol: " + sol);
 			
+			System.out.println("done");
 			out.close();
 			in.close();
 			s.close();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Could not connect to the map server!");
+			mapServer = null;
+			setChanged();
+			notifyObservers("connectToMapServer_failed");
 		}
 		
 	}
