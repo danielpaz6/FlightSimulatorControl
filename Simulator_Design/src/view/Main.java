@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.Model;
 import model.SimModel;
+import server.SimVarsByXML;
 import viewmodel.ViewModel;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
@@ -142,9 +143,11 @@ public class Main extends Application {
 			
 			// Initializes the Server Variable that includes the Command List and Simulator variables. 
 			CommandFactory<Command> exp = new CommandFactory<>();
-			Server server = new Server(exp, () -> {
+			/*Server server = new Server(exp, () -> {
 				return new String[] {"simX", "simY", "simZ"};
-			});
+			});*/
+			
+			Server server = new Server(exp, new SimVarsByXML("generic_small.xml"));
 			
 			exp.insertCommand("openDataServer", OpenServerCommand.class);
 			exp.insertCommand("connect", ConnectCommand.class);

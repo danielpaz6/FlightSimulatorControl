@@ -32,6 +32,8 @@ public class VarNumber implements Expression
 		{
 			//System.out.println("get " + (String)symbolTbl.get(name).getValue());
 			
+			//System.out.println(t.getValue());
+			//System.out.println(server.getServerData().get("/controls/engines/current-engine/throttle"));
 			return server.getServerData().get(t.getValue());
 			
 			//server.client.sendSimulatorOrder(var, value);

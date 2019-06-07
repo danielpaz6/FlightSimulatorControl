@@ -136,7 +136,7 @@ public class ShuntingYard
 				    	stackExp.push(new Minus(left, right));
 				    	break;
 				    case "~":
-				    	stackExp.push(new Mul(new Number(-1), right));
+				    	stackExp.push(new Mul(new Number(-1), right)); // unary operator
 				    	break;
 				}
 			}

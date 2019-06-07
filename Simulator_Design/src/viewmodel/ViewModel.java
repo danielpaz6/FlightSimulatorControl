@@ -30,7 +30,7 @@ public class ViewModel extends Observable implements Observer {
 	public StringProperty mapCoordinateString;
 	
 	public IntegerProperty planeCordX, planeCordY;
-	public IntegerProperty destCordX, destCordY;\
+	public IntegerProperty destCordX, destCordY;
 	
 	public StringProperty mapPathSol; 
 	

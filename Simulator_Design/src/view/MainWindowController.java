@@ -352,7 +352,7 @@ public class MainWindowController implements Initializable, View, Observer {
 		
 		mapDisplayer.redraw(maxMapPlane);
 		mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
-		mapDisplayer.markDest(posX,posY);
+		mapDisplayer.markDestByMouse(posX,posY);
 		
 		// Data binding the MarkOn sign to the View Model.
 		destCordX.set(mapDisplayer.destX);
@@ -421,10 +421,10 @@ public class MainWindowController implements Initializable, View, Observer {
 				connectSim_pane2.setVisible(true);
 			}
 			else if(arg.equals("done map calculate")) {
-				
+				System.out.println("redraw everything");
 				mapDisplayer.redraw(maxMapPlane);
 				mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
-				mapDisplayer.markDest(destCordX.get(),destCordY.get());
+				mapDisplayer.markDestByPosition(destCordX.get(),destCordY.get());
 				mapDisplayer.drawPath(mapPathSol.get());
 			}
 		}

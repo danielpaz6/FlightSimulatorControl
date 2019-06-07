@@ -10,6 +10,9 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import algorithms.BestFirstSearch;
 import algorithms.MatrixProblem;
@@ -37,6 +40,10 @@ public class Model extends Observable implements SimModel {
 	int mapSolverIP = 6420;
 	
 	String mapPathSol;
+	
+	
+	// Thread pool for map solutions
+	ExecutorService mapExecutor = Executors.newFixedThreadPool(2);
 	
 	
 	public Model(Server server) {
@@ -210,12 +217,6 @@ public class Model extends Observable implements SimModel {
 		interpreter.start(text);
 	}
 
-	@Override
-	public List<State<Position>> getMapPath() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void calculateMap(String mapCor, int planeX, int planeY, int destX, int destY) {
 		
 		Socket s=null;
@@ -250,14 +251,11 @@ public class Model extends Observable implements SimModel {
 			out.println(destX + "," + destY);
 			out.flush();
 			
-			CompletableFuture.supplyAsync(() -> {return in.readLine();})
-			.thenAccept(answer -> {
-				
-				mapPathSol = answer;
-				setChanged();
-				notifyObservers("done map calculate");
-			});
-			
+			mapPathSol = in.readLine();
+			//System.out.println("sol: " + mapPathSol);
+			setChanged();
+			notifyObservers("done map calculate");
+	
 			out.close();
 			in.close();
 			s.close();

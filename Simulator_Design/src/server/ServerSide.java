@@ -23,11 +23,14 @@ public class ServerSide {
 	private volatile boolean stop;
 	public Server serv;
 	private String[] tmpDataList;
+	public int routines;
 	
-	public ServerSide(int port, ClientHandler ch, Server server) {
+	public ServerSide(int port, ClientHandler ch, Server server, int routines) {
 		this.port = port;
 		stop = false;
 		this.serv = server;
+		this.routines = routines; // how many times to update the Simulator variables per second.
+		
 		//es = Executors.newCachedThreadPool();
 		
 		// Initializes the serverData HashMap that contains the flight's data.
@@ -78,17 +81,8 @@ public class ServerSide {
 							serv.getServerData().put(tmpDataList[i], Double.parseDouble(flightData[i]));
 						}
 						
-						/*int i = 0;
-						for(Entry<String, Double> e : serv.getServerData().entrySet())
-						{
-							e.setValue(Double.parseDouble(flightData[i]));
-							i++;
-							
-							//System.out.println(e.getKey()+","+e.getValue());
-						}*/
-						
-						
-						//System.out.println(line);
+						// Updates the Simulator symbol table routines times in a second.
+						Thread.sleep(1000 / routines);
 					}
 					
 					aClient.getInputStream().close();

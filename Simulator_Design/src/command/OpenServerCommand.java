@@ -20,7 +20,7 @@ public class OpenServerCommand extends CommonCommand {
 
 	@Override
 	public int execute() {
-		server.serverSide = new ServerSide((int)server.getCachedExp().get(par1).calculate(),new ServerHandler(),server);
+		server.serverSide = new ServerSide((int)server.getCachedExp().get(par1).calculate(),new ServerHandler(),server, Integer.parseInt(par2));
 		server.serverSide.start();
 		return 0;
 	}

@@ -37,9 +37,9 @@ public class AssignmentCommand extends CommonCommand{
 			else {
 				String varSimulator = (String)server.getSymbolTbl().get(varName).getValue();
 				double varAmount = server.getCachedExp().get(varValue).calculate();
-				server.client.sendSimulatorOrder(varSimulator, varAmount);
+				server.client.sendSimulatorOrder(varSimulator, varAmount); // for example: set /controls/flight/aileron 1
 				
-				server.getServerData().put(varSimulator,varAmount);
+				//server.getServerData().put(varSimulator, varAmount);
 			}
 			
 		return 0;

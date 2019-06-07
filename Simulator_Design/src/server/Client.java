@@ -19,7 +19,8 @@ public class Client
 	
 	public void sendSimulatorOrder(String var, double value) {
 		//System.out.println("Order: " + "set " + var + " " + value);
-		outToServer.println("set " + var + " " + value);
+		//outToServer.println("set " + var + " " + value + "\n");
+		outToServer.write("set " + var + " " + value + "\r\n");
 		outToServer.flush();
 		
 		//System.out.println("Finished to Order after a flush");

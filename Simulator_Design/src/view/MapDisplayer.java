@@ -100,7 +100,7 @@ public class MapDisplayer extends Canvas {
 		}
 	}
 	
-	public void markDest(double posX, double posY) {
+	public void markDestByMouse(double posX, double posY) {
 		isMarkedOnMap = true;
 		int corX = (int)(posX / widthBlock);
 		int corY = (int)(posY / heightBlock);
@@ -123,20 +123,62 @@ public class MapDisplayer extends Canvas {
 		}
 	}
 	
+	public void markDestByPosition(int posX, int posY) {
+		isMarkedOnMap = true;
+		int corX = posY;
+		int corY = posX;
+		
+		// It's opposite from corX and corY because the (0,0) is top left
+		// and the width means columns and height means rows.
+		destX = corX;
+		destY = corY;
+		
+		try {
+			Image img = new Image(new FileInputStream("./resources/close.png"));
+			GraphicsContext gc = getGraphicsContext2D();
+			//redraw(max); // redraw the map
+			movePlane(planeX, planeY); // redraw the plane location
+			gc.drawImage(img, corX*widthBlock, corY*heightBlock); // draw the dest
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void putMarkOnMap(MouseEvent e) {
 		System.out.println("test");
 	}
 	
 	public void drawPath(String path) {
-		
 		String[] mapPath = path.split(",");
 		GraphicsContext gc = getGraphicsContext2D();
+		gc.setFill(Color.BLACK);
+		
 		int posX = planeX, posY = planeY;
-		for (String direction : mapPath) {
-			
-			if(direction.equals("right")) {
+		
+		System.out.println(planeX + "," + planeY);
+		System.out.println(widthBlock);
+		System.out.println(heightBlock);
+		
+		int len = mapPath.length - 1;
+		for(int i = 0; i < len; i++) {
+			if(mapPath[i].equals("Right")) {
 				++posX;
-				gc.fillRect(posX * widthBlock, posY * heightBlock, widthBlock/2, heightBlock/4);
+				gc.fillRect(posX * widthBlock, posY * heightBlock + heightBlock/3, widthBlock/2, heightBlock/6);
+			}
+			else if(mapPath[i].equals("Down")) {
+				++posY;
+				gc.fillRect(posX * widthBlock + widthBlock/3, posY * heightBlock, widthBlock/6, heightBlock/2);
+			}
+			else if(mapPath[i].equals("Left")) {
+				--posX;
+				gc.fillRect(posX * widthBlock, posY * heightBlock + heightBlock/3, widthBlock/2, heightBlock/6);
+			}
+			else if(mapPath[i].equals("Up")) {
+				--posY;
+				gc.fillRect(posX * widthBlock + widthBlock/3, posY * heightBlock, widthBlock/6, heightBlock/2);
+
 			}
 			
 		}
