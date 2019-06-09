@@ -9,6 +9,7 @@
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -162,6 +163,11 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Label>
+            <ListProject height="270.0" layoutX="27.0" layoutY="130.0" width="350.0" />
+            
+            <!-- <ListProject layoutX="23.0" layoutY="124.0" prefHeight="35.0" prefWidth="364.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" /> -->
+            
+            <!--
             <Pane layoutX="23.0" layoutY="124.0" prefHeight="35.0" prefWidth="364.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0">
                <children>
                   <MaterialDesignIconView fill="#074495" glyphName="GOOGLE_CIRCLES_EXTENDED" layoutX="8.0" layoutY="23.0" size="15" />
@@ -246,6 +252,7 @@
                   <MaterialDesignIconView glyphName="ACCOUNT_CHECK" layoutX="263.0" layoutY="23.0" size="15" />
                </children>
             </Pane>
+            -->
          </children>
       </AnchorPane>
       <AnchorPane fx:id="script_pane" layoutX="242.0" prefHeight="421.0" prefWidth="410.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
