@@ -447,13 +447,12 @@ public class MainWindowController implements Initializable, View, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o == viewModel)
-		{
-			// comment 
+		{ 
 			if(arg.equals("done_closePopUp")) {
 				connectSim_pane.setVisible(false);
 				connectSim_pane2.setVisible(false);
 				//Change the plane on the mapDisplayer.
-				mapDisplayer.setPlaneOnMap(simPlaneX,simPlaneY);
+				mapDisplayer.setPlaneOnMap(simPlaneX.get(),simPlaneY.get());
 			}
 			else if(arg.equals("setVisibleTrue_to_ConnectAnchorPane")) {
 				connectSim_pane.setVisible(true);
