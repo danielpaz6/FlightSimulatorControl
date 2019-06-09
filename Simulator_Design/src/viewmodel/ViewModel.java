@@ -106,9 +106,17 @@ public class ViewModel extends Observable implements Observer {
 	public void update(Observable o, Object arg) {
 		if(o == model) {
 			if(arg.equals("connectToServer_success")) {
+				simPlaneX.set(model.getPlaneX());
+				simPlaneY.set(model.getPlaneY());
+				
 				connect_result.set(false); // change the visible to False
 				setChanged();
 				notifyObservers("done_closePopUp");
+			}
+			else if(arg.equals("connectToMapServer_success")) {
+				connect_result.set(false); // change the visible to False
+				setChanged();
+				notifyObservers("done_closePopUpMap"); // closing the map pop up
 			}
 			else if(arg.equals("connectToServer_failed")) {
 				// will pop up message: Sorry! couldn't connect to the Simulator

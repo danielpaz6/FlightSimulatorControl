@@ -17,13 +17,11 @@ breaks = 0
 throttle = 1
 var h0 = heading
 sleep 5000
+print "start while alt < 1000 !"
 while alt < 1000 {
 	rudder = (h0 - heading)/180
 	aileron = - roll / 70
 	elevator = pitch / 50
-	print x
-	print y
-	print "------------------------"
 	sleep 150
 }
 print "done"

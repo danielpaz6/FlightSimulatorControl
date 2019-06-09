@@ -26,14 +26,19 @@ public class MapDisplayer extends Canvas {
 	double heightBlock;
 	double max;
 	int destX, destY; // position of plane dest
-	int planeX, planeY; // position of plane.
+	public int planeX, planeY; // position of plane.
 	double initPlaneX = -5509036.243, initPlaneY = -2232151.782;
 	String path;
+	int initMapPlaneX, initMapPlaneY;
 	
-	boolean isMarkedOnMap;
+	public boolean isMarkedOnMap; // == isDestOnMap
+	public boolean isMapLoaded;
+	public boolean isPathExists;
 	
 	public MapDisplayer(){
 		isMarkedOnMap = false;
+		isMapLoaded = false;
+		isPathExists = false;
 		//redraw();
 	}
 	
@@ -41,6 +46,8 @@ public class MapDisplayer extends Canvas {
 		this.coordinates = coordinates;
 		this.planeX = x;
 		this.planeY = y;
+		this.initMapPlaneX = x;
+		this.initMapPlaneY = y;
 		this.distance = distance;
 		this.max = max;
 		
@@ -84,20 +91,53 @@ public class MapDisplayer extends Canvas {
 		}
 	}
 	public void setPath(String path) {
-		
+		isPathExists = true;
 		this.path = path;
 	}
-	public void setPlaneOnMap(double simPlaneX, double simPlaneY) {
-		int planePosX = (int)((simPlaneX - initPlaneX) / distance);
-		int planePosY = (int)((simPlaneY - initPlaneY) / distance);
+	
+	public void setPlaneOnMap(double simPlaneX, double simPlaneY)
+	{
+		
+		int planePosX = ((int)((simPlaneX - initPlaneX) / distance)) + initMapPlaneX;
+		int planePosY = -1 * ((int)((simPlaneY - initPlaneY) / distance)) + initMapPlaneY;
+		
+		System.out.println("initPlaneX: " + initPlaneX);
+		System.out.println("initPlaneY: " + initPlaneY);
+		System.out.println("simPlaneX: " + simPlaneX);
+		System.out.println("simPlaneY: " + simPlaneY);
+		System.out.println("distance: " + distance);
+		System.out.println("planePosX: " + planePosX);
+		System.out.println("planePosY: " + planePosY);
+		
+		if(simPlaneX == 0 && simPlaneY == 0)
+			return;
 		
 		redraw(max);
-		movePlane(planePosX,planePosY);
-		markDestByPosition(destX,destY);
-		drawPath(path);
+		movePlaneByPosition(planePosX, planePosY);
 		
+		if(isMarkedOnMap == true)
+			markDestByPosition(destX, destY);
 		
+		if(isPathExists == true)
+			drawPath(path);
 	}
+	
+	public void movePlaneByPosition(int posX, int posY) {
+		planeX = posX;
+		planeY = posY;
+		
+		try {
+			Image img = new Image(new FileInputStream("./resources/plane.png"));
+			GraphicsContext gc = getGraphicsContext2D();
+			//redraw(max); // redraw the map
+			gc.drawImage(img, posX*widthBlock, posY*heightBlock); // draw plane
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void movePlane(double posX, double posY) {
 		int corX = (int)(posX / widthBlock);
 		int corY = (int)(posY / heightBlock);
@@ -123,14 +163,14 @@ public class MapDisplayer extends Canvas {
 		
 		// It's opposite from corX and corY because the (0,0) is top left
 		// and the width means columns and height means rows.
-		destX = corY;
-		destY = corX;
+		destX = corX;
+		destY = corY;
 		
 		try {
 			Image img = new Image(new FileInputStream("./resources/close.png"));
 			GraphicsContext gc = getGraphicsContext2D();
 			//redraw(max); // redraw the map
-			movePlane(planeX, planeY); // redraw the plane location
+			//movePlane(planeX, planeY); // redraw the plane location
 			gc.drawImage(img, corX*widthBlock, corY*heightBlock); // draw the dest
 			
 		} catch (FileNotFoundException e) {
@@ -141,8 +181,8 @@ public class MapDisplayer extends Canvas {
 	
 	public void markDestByPosition(int posX, int posY) {
 		isMarkedOnMap = true;
-		int corX = posY;
-		int corY = posX;
+		int corX = posX;
+		int corY = posY;
 		
 		// It's opposite from corX and corY because the (0,0) is top left
 		// and the width means columns and height means rows.
@@ -153,7 +193,7 @@ public class MapDisplayer extends Canvas {
 			Image img = new Image(new FileInputStream("./resources/close.png"));
 			GraphicsContext gc = getGraphicsContext2D();
 			//redraw(max); // redraw the map
-			movePlane(planeX, planeY); // redraw the plane location
+			//movePlane(planeX, planeY); // redraw the plane location
 			gc.drawImage(img, corX*widthBlock, corY*heightBlock); // draw the dest
 			
 		} catch (FileNotFoundException e) {

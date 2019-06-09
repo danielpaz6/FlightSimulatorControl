@@ -349,6 +349,7 @@ public class MainWindowController implements Initializable, View, Observer {
 					}
 				}
 				
+				mapDisplayer.isMapLoaded = true;
 				maxMapPlane = max;
 				planeCordX.set(corX);
 				planeCordY.set(corY);
@@ -369,8 +370,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		double posY = e.getY();
 		
 		mapDisplayer.redraw(maxMapPlane);
-		mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
-		mapDisplayer.markDestByMouse(posX,posY);
+		mapDisplayer.movePlaneByPosition(mapDisplayer.planeX, mapDisplayer.planeY);
+		mapDisplayer.markDestByMouse(posX, posY);
 		
 		// Data binding the MarkOn sign to the View Model.
 		destCordX.set(mapDisplayer.destX);
@@ -451,19 +452,29 @@ public class MainWindowController implements Initializable, View, Observer {
 			if(arg.equals("done_closePopUp")) {
 				connectSim_pane.setVisible(false);
 				connectSim_pane2.setVisible(false);
+				
 				//Change the plane on the mapDisplayer.
-				mapDisplayer.setPlaneOnMap(simPlaneX.get(),simPlaneY.get());
+				if(mapDisplayer.isMapLoaded == true)
+				{
+					mapDisplayer.setPlaneOnMap(simPlaneX.get(), simPlaneY.get());
+					planeCordX.set(mapDisplayer.planeX);
+					planeCordY.set(mapDisplayer.planeY);
+				}
 			}
 			else if(arg.equals("setVisibleTrue_to_ConnectAnchorPane")) {
 				connectSim_pane.setVisible(true);
 				connectSim_pane2.setVisible(true);
 			}
 			else if(arg.equals("done map calculate")) {
-				System.out.println("redraw everything");
-				mapDisplayer.redraw(maxMapPlane);
-				mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
-				mapDisplayer.markDestByPosition(destCordX.get(),destCordY.get());
-				mapDisplayer.drawPath(mapPathSol.get());
+				//mapDisplayer.redraw(maxMapPlane);
+				//mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
+				//mapDisplayer.movePlaneByPosition(mapDisplayer.planeX, mapDisplayer.planeY);
+				//mapDisplayer.markDestByPosition(destCordY.get(), destCordX.get());
+				//mapDisplayer.drawPath(mapPathSol.get());
+				
+				if(mapDisplayer.isMapLoaded == true)
+					mapDisplayer.setPlaneOnMap(simPlaneX.get(), simPlaneY.get());
+				
 				mapDisplayer.setPath(mapPathSol.get());
 			}
 		}

@@ -38,7 +38,7 @@ public class MapPopUpController implements View, Observer {
 	public void update(Observable o, Object arg)
 	{
 		if(o == viewModel) {
-			if(arg.equals("done_closePopUp")) {
+			if(arg.equals("done_closePopUpMap")) {
 			    Stage stage = (Stage) text_ip.getScene().getWindow();
 			    stage.close();
 			}

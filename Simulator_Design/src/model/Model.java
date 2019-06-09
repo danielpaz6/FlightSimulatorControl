@@ -64,11 +64,15 @@ public class Model extends Observable implements SimModel {
 				if(server.client != null)
 				{
 					try {
-						server.client.theServer.getInputStream().read();
+						//System.out.println("1");
+						server.client.theServer.getInputStream().available();
+						//System.out.println("2");
 						
 						// If you are here it means you are connected to the Flight Simulator
 						simPlaneX = server.getServerData().get("/sim/current-view/viewer-x-m");
 						simPlaneY = server.getServerData().get("/sim/current-view/viewer-y-m");
+						
+						
 						setChanged();
 						notifyObservers("connectToServer_success");
 					} catch (IOException e) {
@@ -252,6 +256,8 @@ public class Model extends Observable implements SimModel {
 			out.println("end");
 			out.flush();
 			
+			System.out.println("Plane COORDS: " + planeX + "," + planeY);
+			System.out.println("DEST COORDS: " + destX + "," + destY);
 			out.println(planeX + "," + planeY);
 			out.flush();
 			out.println(destX + "," + destY);
