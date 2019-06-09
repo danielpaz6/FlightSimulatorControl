@@ -34,11 +34,13 @@ public class MapDisplayer extends Canvas {
 	public boolean isMarkedOnMap; // == isDestOnMap
 	public boolean isMapLoaded;
 	public boolean isPathExists;
+	public boolean isPlaneMoved;
 	
 	public MapDisplayer(){
 		isMarkedOnMap = false;
 		isMapLoaded = false;
 		isPathExists = false;
+		isPlaneMoved = true;
 		//redraw();
 	}
 	
@@ -95,22 +97,67 @@ public class MapDisplayer extends Canvas {
 		this.path = path;
 	}
 	
+	public void updateIsPlaneMoved(double simPlaneX, double simPlaneY) {
+		int planePosX = ((int)((simPlaneX - initPlaneX) / distance)) + initMapPlaneX;
+		int planePosY = -1 * ((int)((simPlaneY - initPlaneY) / distance)) + initMapPlaneY;
+		
+		/*System.out.println("initPlaneX: " + initPlaneX);
+		System.out.println("initPlaneY: " + initPlaneY);
+		System.out.println("simPlaneX: " + simPlaneX);
+		System.out.println("simPlaneY: " + simPlaneY);
+		System.out.println("distance: " + distance);
+		System.out.println("planePosX: " + planePosX);
+		System.out.println("planePosY: " + planePosY);*/
+		
+		// the position of the plane before finish loading
+		if(simPlaneX == -5506399.0 && simPlaneY == -2231083.25)
+			return;
+		
+		if(simPlaneX == 0 && simPlaneY == 0)
+			return;
+		
+		if(planePosX < 0 || planePosY < 0)
+		{
+			System.out.println("simPlaneX < 0 || simPlaneY < 0");
+			return;
+		}
+		
+		if(planePosX != planeX || planePosY != planeY)
+		{
+			isPlaneMoved = true;
+			planeX = planePosX;
+			planeY = planePosY;
+		}
+		else
+			isPlaneMoved = false;
+	}
+	
 	public void setPlaneOnMap(double simPlaneX, double simPlaneY)
 	{
 		
 		int planePosX = ((int)((simPlaneX - initPlaneX) / distance)) + initMapPlaneX;
 		int planePosY = -1 * ((int)((simPlaneY - initPlaneY) / distance)) + initMapPlaneY;
 		
-		System.out.println("initPlaneX: " + initPlaneX);
+		/*System.out.println("initPlaneX: " + initPlaneX);
 		System.out.println("initPlaneY: " + initPlaneY);
 		System.out.println("simPlaneX: " + simPlaneX);
 		System.out.println("simPlaneY: " + simPlaneY);
 		System.out.println("distance: " + distance);
 		System.out.println("planePosX: " + planePosX);
-		System.out.println("planePosY: " + planePosY);
+		System.out.println("planePosY: " + planePosY);*/
+		
+		// the position of the plane before finish loading
+		if(simPlaneX == -5506399.0 && simPlaneY == -2231083.25)
+			return;
 		
 		if(simPlaneX == 0 && simPlaneY == 0)
 			return;
+		
+		if(planePosX < 0 || planePosY < 0)
+		{
+			System.out.println("simPlaneX < 0 || simPlaneY < 0");
+			return;
+		}
 		
 		redraw(max);
 		movePlaneByPosition(planePosX, planePosY);
@@ -118,13 +165,20 @@ public class MapDisplayer extends Canvas {
 		if(isMarkedOnMap == true)
 			markDestByPosition(destX, destY);
 		
-		if(isPathExists == true)
-			drawPath(path);
+		//if(isPathExists == true)
+			//drawPath(path);
 	}
 	
 	public void movePlaneByPosition(int posX, int posY) {
-		planeX = posX;
-		planeY = posY;
+		
+		if(posX != planeX || posY != planeY)
+		{
+			isPlaneMoved = true;
+			planeX = posX;
+			planeY = posY;
+		}
+		else
+			isPlaneMoved = false;
 		
 		try {
 			Image img = new Image(new FileInputStream("./resources/plane.png"));
@@ -212,10 +266,12 @@ public class MapDisplayer extends Canvas {
 		gc.setFill(Color.BLACK);
 		
 		int posX = planeX, posY = planeY;
+		System.out.println("posx + posy:");
+		System.out.println(posX + "," + posY);
 		
-		System.out.println(planeX + "," + planeY);
+		/*System.out.println(planeX + "," + planeY);
 		System.out.println(widthBlock);
-		System.out.println(heightBlock);
+		System.out.println(heightBlock);*/
 		
 		int len = mapPath.length - 1;
 		for(int i = 0; i < len; i++) {

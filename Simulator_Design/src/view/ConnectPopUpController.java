@@ -40,7 +40,8 @@ public class ConnectPopUpController implements View, Observer {
 		if(o == viewModel) {
 			if(arg.equals("done_closePopUp")) {
 			    Stage stage = (Stage) text_ip.getScene().getWindow();
-			    stage.close();
+			    if(stage.isShowing())
+			    	stage.close();
 			}
 		}		
 	}

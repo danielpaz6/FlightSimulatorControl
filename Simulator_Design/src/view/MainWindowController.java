@@ -374,8 +374,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		mapDisplayer.markDestByMouse(posX, posY);
 		
 		// Data binding the MarkOn sign to the View Model.
-		destCordX.set(mapDisplayer.destX);
-		destCordY.set(mapDisplayer.destY);
+		destCordX.set(mapDisplayer.destY);
+		destCordY.set(mapDisplayer.destX);
 		
 		// Once picked new destination, we'll call re-calculate the path to the dest.
 		viewModel.calculateMap();
@@ -456,9 +456,18 @@ public class MainWindowController implements Initializable, View, Observer {
 				//Change the plane on the mapDisplayer.
 				if(mapDisplayer.isMapLoaded == true)
 				{
-					mapDisplayer.setPlaneOnMap(simPlaneX.get(), simPlaneY.get());
-					planeCordX.set(mapDisplayer.planeX);
-					planeCordY.set(mapDisplayer.planeY);
+					//mapDisplayer.setPlaneOnMap(simPlaneX.get(), simPlaneY.get());
+					mapDisplayer.updateIsPlaneMoved(simPlaneX.get(), simPlaneY.get());
+					
+					planeCordX.set(mapDisplayer.planeY);
+					planeCordY.set(mapDisplayer.planeX);
+									
+					// Once plane moved, we'll call re-calculate the path to the dest.
+					if(mapDisplayer.isPlaneMoved == true)
+					{
+						viewModel.calculateMap();
+						mapDisplayer.isPlaneMoved = false;
+					}
 				}
 			}
 			else if(arg.equals("setVisibleTrue_to_ConnectAnchorPane")) {
@@ -472,10 +481,16 @@ public class MainWindowController implements Initializable, View, Observer {
 				//mapDisplayer.markDestByPosition(destCordY.get(), destCordX.get());
 				//mapDisplayer.drawPath(mapPathSol.get());
 				
+				//System.out.println("done map calculate msg:");
+				String tmpPath = mapPathSol.get();
+				//System.out.println(tmpPath);
+				
 				if(mapDisplayer.isMapLoaded == true)
 					mapDisplayer.setPlaneOnMap(simPlaneX.get(), simPlaneY.get());
 				
-				mapDisplayer.setPath(mapPathSol.get());
+				//System.out.println("about to print the setPath():");
+				mapDisplayer.setPath(tmpPath);
+				mapDisplayer.drawPath(tmpPath);
 			}
 		}
 		

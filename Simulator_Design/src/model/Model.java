@@ -264,7 +264,7 @@ public class Model extends Observable implements SimModel {
 			out.flush();
 			
 			mapPathSol = in.readLine();
-			//System.out.println("sol: " + mapPathSol);
+			System.out.println("sol: " + mapPathSol);
 			setChanged();
 			notifyObservers("done map calculate");
 	
