@@ -448,6 +448,7 @@ public class MainWindowController implements Initializable, View, Observer {
 	public void update(Observable o, Object arg) {
 		if(o == viewModel)
 		{
+			// comment 
 			if(arg.equals("done_closePopUp")) {
 				connectSim_pane.setVisible(false);
 				connectSim_pane2.setVisible(false);
