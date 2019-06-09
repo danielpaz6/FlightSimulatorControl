@@ -141,4 +141,16 @@
 	<format>%f</format>
     <node>/engines/engine/rpm</node>
 	</chunk>
+	<chunk>
+    <name>viewer-x-m</name>
+	<type>float</type>
+	<format>%f</format>
+    <node>/sim/current-view/viewer-x-m</node>
+	</chunk>
+	<chunk>
+    <name>viewer-y-m</name>
+	<type>float</type>
+	<format>%f</format>
+    <node>/sim/current-view/viewer-y-m</node>
+	</chunk>
 </output></generic></PropertyList>
