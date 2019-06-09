@@ -1,0 +1,35 @@
+<PropertyList>
+	<generic>
+		<output>
+			<line_separator>newline</line_separator>
+			<var_separator>,</var_separator>
+			<chunk>
+				<name>Take off</name>
+				<type>Cessna C172p</type>
+				<owner>Daniel Paz</owner>
+				<direction>script1.txt</direction>
+			</chunk>
+			
+			<chunk>
+				<name>Plane Wags</name>
+				<type>Cessna C172p</type>
+				<owner>Daniel Paz</owner>
+				<direction>script2.txt</direction>
+			</chunk>
+			
+			<chunk>
+				<name>Plane Crash</name>
+				<type>Cessna C172p</type>
+				<owner>Omer Nahum</owner>
+				<direction>script3.txt</direction>
+			</chunk>
+			
+			<chunk>
+				<name>Landing Script</name>
+				<type>Boeing 747</type>
+				<owner>Omer Nahum</owner>
+				<direction>script4.txt</direction>
+			</chunk>
+		</output>
+	</generic>
+</PropertyList>

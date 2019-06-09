@@ -99,6 +99,11 @@ public class MainWindowController implements Initializable, View, Observer {
 	
 	public StringProperty mapPathSol;
 	
+	// Project data members
+	
+	@FXML
+	ListProject projectList;
+	
 	public MainWindowController() {
 		aileron = new SimpleDoubleProperty();
 		elevator = new SimpleDoubleProperty();
@@ -108,7 +113,6 @@ public class MainWindowController implements Initializable, View, Observer {
 		destCordX = new SimpleIntegerProperty();
 		destCordY = new SimpleIntegerProperty();
 		mapPathSol = new SimpleStringProperty();
-		
 	}
 	
 	@Override
@@ -142,6 +146,9 @@ public class MainWindowController implements Initializable, View, Observer {
 		//mapDisplayer.setMapData(null, 0, 0, 0, 0); // map initialized to null ( white blocks ) 
 		
 		System.out.println(initializedCenterX + "," + initializedCenterY);
+		
+		projectList.setXMLDirectory("./resources/projects.xml");
+		projectList.drawProjects();
 	}
 	
 	public void handleButtonAction(ActionEvent event)
