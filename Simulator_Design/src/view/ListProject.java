@@ -8,6 +8,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -19,15 +21,17 @@ import javafx.scene.text.Font;
 
 public class ListProject extends AnchorPane {
 	
-	String fileName;
-;
+	String xmlFileName;
+	public StringProperty scriptFileName;
+	
 	public ListProject() {
 		//System.out.println("draw projects!");
 		//drawProjects("./resources/projects.xml");
+		scriptFileName = new SimpleStringProperty();
 	}
 	
 	public void setXMLDirectory(String fileName) {
-		this.fileName = fileName;
+		this.xmlFileName = fileName;
 	}
 	
 	public void drawProjects() {
@@ -35,7 +39,7 @@ public class ListProject extends AnchorPane {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.parse(fileName);
+			Document doc = builder.parse(xmlFileName);
 			NodeList nameList = doc.getElementsByTagName("name");
 			NodeList typeList = doc.getElementsByTagName("type");
 			NodeList ownerList = doc.getElementsByTagName("owner");
@@ -117,6 +121,7 @@ public class ListProject extends AnchorPane {
 				
 				p.setOnMousePressed(e -> {
 					System.out.println("file: " + dir.getTextContent());
+					scriptFileName.set(dir.getTextContent());
 				});
 				
 				this.getChildren().add(p);

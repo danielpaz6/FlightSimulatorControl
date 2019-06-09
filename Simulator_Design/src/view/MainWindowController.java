@@ -104,6 +104,8 @@ public class MainWindowController implements Initializable, View, Observer {
 	@FXML
 	ListProject projectList;
 	
+	StringProperty scriptFileName;
+	
 	public MainWindowController() {
 		aileron = new SimpleDoubleProperty();
 		elevator = new SimpleDoubleProperty();
@@ -113,6 +115,7 @@ public class MainWindowController implements Initializable, View, Observer {
 		destCordX = new SimpleIntegerProperty();
 		destCordY = new SimpleIntegerProperty();
 		mapPathSol = new SimpleStringProperty();
+		scriptFileName = new SimpleStringProperty();
 	}
 	
 	@Override
@@ -146,6 +149,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		//mapDisplayer.setMapData(null, 0, 0, 0, 0); // map initialized to null ( white blocks ) 
 		
 		System.out.println(initializedCenterX + "," + initializedCenterY);
+		
+		this.scriptFileName.bind(projectList.scriptFileName);
 		
 		projectList.setXMLDirectory("./resources/projects.xml");
 		projectList.drawProjects();
@@ -413,6 +418,20 @@ public class MainWindowController implements Initializable, View, Observer {
 	
 	public void loadFromFile() {
 		viewModel.loadFromFile();
+	}
+	
+	public void projectClicked() {
+		
+		if(scriptFileName.get().contains(".txt")) {
+			try {
+				Scanner scanner = new Scanner(new File(scriptFileName.get()));
+				String text = scanner.useDelimiter("\\A").next();
+				scanner.close();
+				scriptTextArea.setText(text);
+				projects_pane.toFront();
+			}catch(Exception e) {}
+		}
+		
 	}
 
 	@Override

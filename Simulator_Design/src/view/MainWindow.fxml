@@ -163,7 +163,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Label>
-            <ListProject fx:id="projectList" layoutX="27.0" layoutY="130.0" prefHeight="270.0" prefWidth="350.0" />
+            <ListProject fx:id="projectList" layoutX="27.0" layoutY="130.0" prefHeight="270.0" prefWidth="350.0" onMouseClicked="#projectClicked" />
             <!-- <AnchorPane fx:id="projectList" layoutX="27.0" layoutY="130.0" prefHeight="270.0" prefWidth="350.0">
                <children>
                   <Pane layoutX="-8.0" prefHeight="35.0" prefWidth="350.0">
