@@ -17,7 +17,8 @@ public interface SimModel {
 	public double getelevator();
 	public double getThrottle();
 	public double getRudder();
-	
+	public double getPlaneX();
+	public double getPlaneY();
 	// General Methods
 	public Server getServer(); // includes Server, Client details
 	public void connectToServer(String ip, double port); // Connecting to the Simulator as a client

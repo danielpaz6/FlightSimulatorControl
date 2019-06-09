@@ -40,6 +40,7 @@ public class Model extends Observable implements SimModel {
 	int mapSolverIP = 6420;
 	
 	String mapPathSol;
+	double simPlaneX, simPlaneY;
 	
 	
 	// Thread pool for map solutions
@@ -66,6 +67,8 @@ public class Model extends Observable implements SimModel {
 						server.client.theServer.getInputStream().read();
 						
 						// If you are here it means you are connected to the Flight Simulator
+						simPlaneX = server.getServerData().get("/sim/current-view/viewer-x-m");
+						simPlaneY = server.getServerData().get("/sim/current-view/viewer-y-m");
 						setChanged();
 						notifyObservers("connectToServer_success");
 					} catch (IOException e) {
@@ -78,7 +81,8 @@ public class Model extends Observable implements SimModel {
 						setChanged();
 						notifyObservers("Disconnected_from_client");
 					}
-				}
+					
+				}		
 			}
 		});
 		checkConnection.start();
@@ -156,6 +160,8 @@ public class Model extends Observable implements SimModel {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 	@Override
 	public void connectToServer(String ip, double port) {
@@ -273,5 +279,15 @@ public class Model extends Observable implements SimModel {
 	public String getPath() {
 		
 		return this.mapPathSol;
+	}
+
+	@Override
+	public double getPlaneX() {
+		return this.simPlaneX;
+	}
+
+	@Override
+	public double getPlaneY() {
+		return this.simPlaneY;
 	}
 }

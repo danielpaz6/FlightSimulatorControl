@@ -31,7 +31,7 @@ public class ViewModel extends Observable implements Observer {
 	
 	public IntegerProperty planeCordX, planeCordY;
 	public IntegerProperty destCordX, destCordY;
-	
+	public DoubleProperty simPlaneX,simPlaneY;
 	public StringProperty mapPathSol; 
 	
 	
@@ -55,7 +55,8 @@ public class ViewModel extends Observable implements Observer {
 		planeCordY = new SimpleIntegerProperty();
 		destCordX = new SimpleIntegerProperty();
 		destCordY = new SimpleIntegerProperty();
-		
+		simPlaneX = new SimpleDoubleProperty();
+		simPlaneY = new SimpleDoubleProperty();
 		mapPathSol = new SimpleStringProperty();
 	}
 	

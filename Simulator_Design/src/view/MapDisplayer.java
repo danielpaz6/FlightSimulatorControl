@@ -27,6 +27,8 @@ public class MapDisplayer extends Canvas {
 	double max;
 	int destX, destY; // position of plane dest
 	int planeX, planeY; // position of plane.
+	double initPlaneX = -5509036.243, initPlaneY = -2232151.782;
+	String path;
 	
 	boolean isMarkedOnMap;
 	
@@ -81,7 +83,21 @@ public class MapDisplayer extends Canvas {
 			}
 		}
 	}
-	
+	public void setPath(String path) {
+		
+		this.path = path;
+	}
+	public void setPlaneOnMap(double simPlaneX, double simPlaneY) {
+		int planePosX = (int)((simPlaneX - initPlaneX) / distance);
+		int planePosY = (int)((simPlaneY - initPlaneY) / distance);
+		
+		redraw(max);
+		movePlane(planePosX,planePosY);
+		markDestByPosition(destX,destY);
+		drawPath(path);
+		
+		
+	}
 	public void movePlane(double posX, double posY) {
 		int corX = (int)(posX / widthBlock);
 		int corY = (int)(posY / heightBlock);

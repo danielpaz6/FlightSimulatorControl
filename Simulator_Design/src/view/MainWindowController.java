@@ -97,6 +97,8 @@ public class MainWindowController implements Initializable, View, Observer {
 	IntegerProperty planeCordX, planeCordY;
 	IntegerProperty destCordX, destCordY;
 	
+	DoubleProperty simPlaneX, simPlaneY;
+	
 	public StringProperty mapPathSol;
 	
 	// Project data members
@@ -116,6 +118,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		destCordY = new SimpleIntegerProperty();
 		mapPathSol = new SimpleStringProperty();
 		scriptFileName = new SimpleStringProperty();
+		simPlaneX = new SimpleDoubleProperty();
+		simPlaneY = new SimpleDoubleProperty();
 	}
 	
 	@Override
@@ -139,6 +143,8 @@ public class MainWindowController implements Initializable, View, Observer {
 		viewModel.destCordY.bind(this.destCordY);
 		
 		this.mapPathSol.bind(viewModel.mapPathSol);
+		this.simPlaneX.bind(viewModel.simPlaneX);
+		this.simPlaneY.bind(viewModel.simPlaneY);
 	}
 	
 	@Override
@@ -445,6 +451,8 @@ public class MainWindowController implements Initializable, View, Observer {
 			if(arg.equals("done_closePopUp")) {
 				connectSim_pane.setVisible(false);
 				connectSim_pane2.setVisible(false);
+				//Change the plane on the mapDisplayer.
+				mapDisplayer.setPlaneOnMap(simPlaneX,simPlaneY);
 			}
 			else if(arg.equals("setVisibleTrue_to_ConnectAnchorPane")) {
 				connectSim_pane.setVisible(true);
@@ -456,6 +464,7 @@ public class MainWindowController implements Initializable, View, Observer {
 				mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
 				mapDisplayer.markDestByPosition(destCordX.get(),destCordY.get());
 				mapDisplayer.drawPath(mapPathSol.get());
+				mapDisplayer.setPath(mapPathSol.get());
 			}
 		}
 		
