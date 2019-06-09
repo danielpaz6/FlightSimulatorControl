@@ -40,7 +40,11 @@ public class ListProject extends AnchorPane {
 				//GraphicsContext gc = this.getGraphicsContext2D();
 				Pane p = new Pane();
 				p.setLayoutX(23.0);
+				p.setLayoutY(124.0);
+				p.prefHeight(35.0);
+				p.prefWidth(364.0);
 				
+				MaterialDesignIconView m = new MaterialDesignIconView();
 				
 				this.getChildren().add(p);
 				
