@@ -421,15 +421,19 @@ public class MainWindowController implements Initializable, View, Observer {
 	}
 	
 	public void projectClicked() {
-		
-		if(scriptFileName.get().contains(".txt")) {
+		if(scriptFileName.get() != null && scriptFileName.get().contains(".txt"))
+		{
 			try {
 				Scanner scanner = new Scanner(new File(scriptFileName.get()));
 				String text = scanner.useDelimiter("\\A").next();
 				scanner.close();
 				scriptTextArea.setText(text);
-				projects_pane.toFront();
-			}catch(Exception e) {}
+				script_pane.toFront();
+				
+				projectList.scriptFileName.set("");
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}

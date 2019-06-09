@@ -120,7 +120,6 @@ public class ListProject extends AnchorPane {
 				});
 				
 				p.setOnMousePressed(e -> {
-					System.out.println("file: " + dir.getTextContent());
 					scriptFileName.set(dir.getTextContent());
 				});
 				
