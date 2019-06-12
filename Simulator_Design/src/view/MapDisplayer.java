@@ -82,6 +82,9 @@ public class MapDisplayer extends Canvas {
 						green = 255;
 					}
 					
+					//if(green > 255) green = 255;
+					//if(red > 255) red = 255;
+					
 					gc.setFill(new Color(red/255, green/255, 0.286, 1));
 					gc.fillRect(j*widthBlock, i*heightBlock, widthBlock, heightBlock);					
 					
