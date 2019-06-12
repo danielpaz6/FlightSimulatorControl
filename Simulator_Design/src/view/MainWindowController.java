@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -17,6 +20,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
 
+import javafx.application.HostServices;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -28,6 +32,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -38,6 +43,7 @@ import viewmodel.ViewModel;
 public class MainWindowController implements Initializable, View, Observer {
 	
 	ViewModel viewModel;
+	private HostServices hostServices;
 	
 	// The Script editor
 	@FXML
@@ -79,6 +85,11 @@ public class MainWindowController implements Initializable, View, Observer {
 	@FXML
 	private MapDisplayer mapDisplayer;
 	
+	
+	// Etc
+	@FXML
+	private Label todaysDate;
+	
 	// Data Members
 	
 	private double radius = 0;
@@ -106,6 +117,13 @@ public class MainWindowController implements Initializable, View, Observer {
 	@FXML
 	ListProject projectList;
 	
+	// Status data members
+	
+	@FXML
+	Label server_online, server_offline, client_online, client_offline, map_online, map_offline;
+	
+	// File
+	
 	StringProperty scriptFileName;
 	
 	public MainWindowController() {
@@ -121,6 +139,14 @@ public class MainWindowController implements Initializable, View, Observer {
 		simPlaneX = new SimpleDoubleProperty();
 		simPlaneY = new SimpleDoubleProperty();
 	}
+	
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices ;
+    }
+    
+    public HostServices getHostServices() {
+        return hostServices;
+    }
 	
 	@Override
 	public void setViewModel(ViewModel viewModel) {
@@ -160,6 +186,14 @@ public class MainWindowController implements Initializable, View, Observer {
 		
 		projectList.setXMLDirectory("./resources/projects.xml");
 		projectList.drawProjects();
+		
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		//System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
+		
+		//todaysDate.setText("Last time online: 25/04/2019");
+		todaysDate.setText("Last time online: " + dateFormat.format(date));
 	}
 	
 	public void handleButtonAction(ActionEvent event)
@@ -195,6 +229,15 @@ public class MainWindowController implements Initializable, View, Observer {
 		else if(event.getSource() == btn_map) {
 			map_pane.toFront();
 		}
+	}
+	
+	public void openGitHub() {
+		getHostServices().showDocument("https://github.com/danielpaz6/");
+		getHostServices().showDocument("https://github.com/OmerNahum/");
+	}
+	
+	public void learnMore() {
+		getHostServices().showDocument("https://github.com/danielpaz6/FlightSimulatorControl");
 	}
 	
 	public void handleMouseEvent(MouseEvent event) {
@@ -450,6 +493,11 @@ public class MainWindowController implements Initializable, View, Observer {
 		if(o == viewModel)
 		{ 
 			if(arg.equals("done_closePopUp")) {
+				client_online.setVisible(true);
+				client_offline.setVisible(false);
+				server_online.setVisible(true);
+				server_offline.setVisible(false);
+				
 				connectSim_pane.setVisible(false);
 				connectSim_pane2.setVisible(false);
 				
@@ -491,6 +539,10 @@ public class MainWindowController implements Initializable, View, Observer {
 				//System.out.println("about to print the setPath():");
 				mapDisplayer.setPath(tmpPath);
 				mapDisplayer.drawPath(tmpPath);
+			}
+			else if(arg.equals("done_closePopUpMap")) {
+				map_online.setVisible(true);
+				map_offline.setVisible(false);
 			}
 		}
 		

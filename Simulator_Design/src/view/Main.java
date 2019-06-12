@@ -168,6 +168,7 @@ public class Main extends Application {
 			
 			MainWindowController mwc= fxl.getController();
 			mwc.setViewModel(vm);
+			mwc.setHostServices(getHostServices());
 			vm.addObserver(mwc);
 			
 			

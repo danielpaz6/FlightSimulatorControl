@@ -86,7 +86,7 @@ public class Model extends Observable implements SimModel {
 						notifyObservers("Disconnected_from_client");
 					}
 					
-				}		
+				}
 			}
 		});
 		checkConnection.start();
