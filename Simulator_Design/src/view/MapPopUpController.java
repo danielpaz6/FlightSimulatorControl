@@ -31,7 +31,7 @@ public class MapPopUpController implements View, Observer {
 	}
 	
 	public void connectToMapSolver() {
-		viewModel.connectToMapSolver();
+		viewModel.connectToMapSolver(null);
 	}
 
 	@Override

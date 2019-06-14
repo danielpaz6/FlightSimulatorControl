@@ -29,4 +29,5 @@ public interface SimModel {
 	public String getPath();	
 	// Run a script Methods
 	public void runScript(String text);
+	public boolean isMapServerAlive();
 }

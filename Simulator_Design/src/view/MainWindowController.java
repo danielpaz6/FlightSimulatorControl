@@ -104,6 +104,9 @@ public class MainWindowController implements Initializable, View, Observer {
 	
 	// Map Data Members
 	
+	@FXML
+	JFXButton btn_connectSim211;
+	
 	private double maxMapPlane;
 	IntegerProperty planeCordX, planeCordY;
 	IntegerProperty destCordX, destCordY;
@@ -543,6 +546,10 @@ public class MainWindowController implements Initializable, View, Observer {
 			else if(arg.equals("done_closePopUpMap")) {
 				map_online.setVisible(true);
 				map_offline.setVisible(false);
+				btn_connectSim211.setVisible(false);
+			}
+			else if(arg.equals("doneMap_first_init")) {
+				viewModel.calculateMap(mapDisplayer.coordinates);
 			}
 		}
 		

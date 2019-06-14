@@ -269,8 +269,8 @@ public class MapDisplayer extends Canvas {
 		gc.setFill(Color.BLACK);
 		
 		int posX = planeX, posY = planeY;
-		System.out.println("posx + posy:");
-		System.out.println(posX + "," + posY);
+		//System.out.println("posx + posy:");
+		//System.out.println(posX + "," + posY);
 		
 		/*System.out.println(planeX + "," + planeY);
 		System.out.println(widthBlock);

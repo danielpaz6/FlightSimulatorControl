@@ -30,7 +30,13 @@ import server_side.SearcherSolver;
 
 public class Model extends Observable implements SimModel {
 	Server server; // Simulator Server
+	
+	// Map Data members
 	MySerialServer mapServer; // Map Problem Solver Server
+	Socket clientMap;
+	PrintWriter out;
+	BufferedReader in;
+	
 	Thread checkConnection;
 	Interpreter interpreter;
 	
@@ -52,6 +58,9 @@ public class Model extends Observable implements SimModel {
 	public Model(Server server) {
 		this.server = server;
 		interpreter = null;
+		clientMap = null;
+		out = null;
+		in = null;
 		
 		/*
 		 * Every 5 seconds, the model will check if we are still connected to the Flight Simulator.
@@ -167,7 +176,10 @@ public class Model extends Observable implements SimModel {
 		return null;
 	}
 	
-	
+	@Override
+	public boolean isMapServerAlive() {
+		return mapServer != null ? true : false;
+	}
 
 	@Override
 	public void connectToServer(String ip, double port) {
@@ -205,7 +217,9 @@ public class Model extends Observable implements SimModel {
 				);
 				
 				mapServer.start(ch, "end"); // running the server
+				System.out.println("Connected to the Map Server!");
 			} catch (Exception e) {
+				System.out.println("Failed to login to the Map Server!");
 				mapServer = null;
 				setChanged();
 				notifyObservers("connectToMapServer_failed");
@@ -218,9 +232,11 @@ public class Model extends Observable implements SimModel {
 		notifyObservers("connectToMapServer_success");
 		
 		
-		// Connecting as client to the Map Server Solver 
-		calculateMap(coordinates, planeX, planeY, destX, destY);
+		// Connecting as client to the Map Server Solver and return cheapest path
+		//calculateMap(coordinates, planeX, planeY, destX, destY);
 		
+		setChanged();
+		notifyObservers("doneMap_first_init");
 	}
 	
 	@Override
@@ -230,53 +246,57 @@ public class Model extends Observable implements SimModel {
 	}
 
 	public void calculateMap(double[][] coordinates, int planeX, int planeY, int destX, int destY) {
-		
-		Socket s=null;
-		PrintWriter out=null;
-		BufferedReader in=null;
 		try {
-			s = new Socket(mapServerIp, mapServerPort);
+			//if(clientMap == null) { 
+			clientMap = new Socket(mapServerIp, mapServerPort);
 			
 			// If we passed this line, it means we logged in to Map Server.
 			setChanged();
 			notifyObservers("connectToServer_success");
 			
+			clientMap.setSoTimeout(3000);				
+			out=new PrintWriter(clientMap.getOutputStream());
+			in=new BufferedReader(new InputStreamReader(clientMap.getInputStream()));
+			//}
 			
-			s.setSoTimeout(3000);
-			out=new PrintWriter(s.getOutputStream());
-			in=new BufferedReader(new InputStreamReader(s.getInputStream()));
-
-
+			String result;
 			for(int i = 0; i < coordinates.length; i++) {
-				String result = Arrays.stream(coordinates[i])
-				        .mapToObj(String::valueOf)
-				        .collect(Collectors.joining(","));
+				result = Arrays.stream(coordinates[i])
+				        .mapToObj(x -> String.valueOf((int)x))
+				        .collect(Collectors.joining(",")).trim();
+				
+				if(result.isEmpty() || result == null)
+					continue;
 				
 				out.println(result);
 				out.flush();
 			}
+			
 			out.println("end");
 			out.flush();
 			
 			//System.out.println("Plane COORDS: " + planeX + "," + planeY);
 			//System.out.println("DEST COORDS: " + destX + "," + destY);
+			
 			out.println(planeX + "," + planeY);
 			out.flush();
 			out.println(destX + "," + destY);
 			out.flush();
 			
+			
 			mapPathSol = in.readLine();
-			System.out.println("sol: " + mapPathSol);
+			
 			setChanged();
 			notifyObservers("done map calculate");
+			
 	
 			out.close();
 			in.close();
-			s.close();
+			clientMap.close();
 			
 		} catch (IOException e) {
 			System.out.println("Could not connect to the map server!");
-			mapServer = null;
+			clientMap = null;
 			setChanged();
 			notifyObservers("connectToMapServer_failed");
 		}
@@ -285,7 +305,6 @@ public class Model extends Observable implements SimModel {
 
 	@Override
 	public String getPath() {
-		
 		return this.mapPathSol;
 	}
 
