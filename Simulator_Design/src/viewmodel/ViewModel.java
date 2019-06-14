@@ -71,9 +71,9 @@ public class ViewModel extends Observable implements Observer {
 		}
 	}
 	
-	public void connectToMapSolver() {
+	public void connectToMapSolver(double[][] coordinates) {
 		try {
-			model.connectToMapServer(text_ip.get(), Double.parseDouble(text_port.get()), this.mapCoordinateString.get(),this.planeCordX.get(),this.planeCordY.get(),this.destCordX.get(),this.destCordY.get());
+			model.connectToMapServer(text_ip.get(), Double.parseDouble(text_port.get()), coordinates,this.planeCordX.get(),this.planeCordY.get(),this.destCordX.get(),this.destCordY.get());
 		}
 		// Probably because text_port.get() = null and can't be parsed to Double
 		catch(Exception e) {
@@ -98,8 +98,8 @@ public class ViewModel extends Observable implements Observer {
 		model.runScript(scriptText.get());
 	}
 	
-	public void calculateMap() {
-		model.calculateMap(this.mapCoordinateString.get(),this.planeCordX.get(),this.planeCordY.get(),this.destCordX.get(),this.destCordY.get());
+	public void calculateMap(double[][] coordinates) {
+		model.calculateMap(coordinates, this.planeCordX.get(),this.planeCordY.get(),this.destCordX.get(),this.destCordY.get());
 	}
 	
 	@Override

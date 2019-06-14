@@ -7,12 +7,14 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 import algorithms.BestFirstSearch;
 import algorithms.MatrixProblem;
@@ -186,7 +188,7 @@ public class Model extends Observable implements SimModel {
 	}
 	
 	@Override
-	public void connectToMapServer(String ip, double port, String mapCor, int planeX, int planeY, int destX,
+	public void connectToMapServer(String ip, double port, double[][] coordinates, int planeX, int planeY, int destX,
 	int destY) {
 		mapServerIp = ip;
 		mapServerPort = (int)port;
@@ -217,7 +219,7 @@ public class Model extends Observable implements SimModel {
 		
 		
 		// Connecting as client to the Map Server Solver 
-		calculateMap(mapCor, planeX, planeY, destX, destY);
+		calculateMap(coordinates, planeX, planeY, destX, destY);
 		
 	}
 	
@@ -227,7 +229,7 @@ public class Model extends Observable implements SimModel {
 		interpreter.start(text);
 	}
 
-	public void calculateMap(String mapCor, int planeX, int planeY, int destX, int destY) {
+	public void calculateMap(double[][] coordinates, int planeX, int planeY, int destX, int destY) {
 		
 		Socket s=null;
 		PrintWriter out=null;
@@ -243,21 +245,21 @@ public class Model extends Observable implements SimModel {
 			s.setSoTimeout(3000);
 			out=new PrintWriter(s.getOutputStream());
 			in=new BufferedReader(new InputStreamReader(s.getInputStream()));
-			//System.out.println(mapCor);
-			//System.out.println("-------------");
-			String[] rows = mapCor.split("\n");
 
-			for(int i = 2; i < rows.length; i++) {
-				//System.out.println(rows[i].trim());
-				out.println(rows[i].trim());
+
+			for(int i = 0; i < coordinates.length; i++) {
+				String result = Arrays.stream(coordinates[i])
+				        .mapToObj(String::valueOf)
+				        .collect(Collectors.joining(","));
 				
+				out.println(result);
 				out.flush();
 			}
 			out.println("end");
 			out.flush();
 			
-			System.out.println("Plane COORDS: " + planeX + "," + planeY);
-			System.out.println("DEST COORDS: " + destX + "," + destY);
+			//System.out.println("Plane COORDS: " + planeX + "," + planeY);
+			//System.out.println("DEST COORDS: " + destX + "," + destY);
 			out.println(planeX + "," + planeY);
 			out.flush();
 			out.println(destX + "," + destY);

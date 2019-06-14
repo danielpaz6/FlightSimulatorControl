@@ -421,7 +421,7 @@ public class MainWindowController implements Initializable, View, Observer {
 		destCordY.set(mapDisplayer.destX);
 		
 		// Once picked new destination, we'll call re-calculate the path to the dest.
-		viewModel.calculateMap();
+		viewModel.calculateMap(mapDisplayer.coordinates);
 	}
 	
 	public void openConnectPopUp() throws IOException {
@@ -513,7 +513,7 @@ public class MainWindowController implements Initializable, View, Observer {
 					// Once plane moved, we'll call re-calculate the path to the dest.
 					if(mapDisplayer.isPlaneMoved == true)
 					{
-						viewModel.calculateMap();
+						viewModel.calculateMap(mapDisplayer.coordinates);
 						mapDisplayer.isPlaneMoved = false;
 					}
 				}

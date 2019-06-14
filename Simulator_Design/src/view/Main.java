@@ -128,8 +128,6 @@ public class Main extends Application {
 			
 			Scene scene = new Scene(root,700,400);
 			
-			//getHostServices().showDocument("https://eclipse.org");
-			
 			// Sets the icon of the application
 			Image applicationIcon = new Image(getClass().getResourceAsStream("../airplane.png"));
 			primaryStage.getIcons().add(applicationIcon);
