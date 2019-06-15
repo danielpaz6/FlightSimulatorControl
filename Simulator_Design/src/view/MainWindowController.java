@@ -525,13 +525,7 @@ public class MainWindowController implements Initializable, View, Observer {
 				connectSim_pane.setVisible(true);
 				connectSim_pane2.setVisible(true);
 			}
-			else if(arg.equals("done map calculate")) {
-				//mapDisplayer.redraw(maxMapPlane);
-				//mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
-				//mapDisplayer.movePlaneByPosition(mapDisplayer.planeX, mapDisplayer.planeY);
-				//mapDisplayer.markDestByPosition(destCordY.get(), destCordX.get());
-				//mapDisplayer.drawPath(mapPathSol.get());
-				
+			else if(arg.equals("done map calculate")) {				
 				//System.out.println("done map calculate msg:");
 				String tmpPath = mapPathSol.get();
 				//System.out.println(tmpPath);

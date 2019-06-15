@@ -121,6 +121,7 @@ public class Main extends Application {
 			textedit.setId("#scripttext");
 			textedit.setLayoutX(270);
 			textedit.setLayoutY(100);
+
 			//textedit.setStyle("scripttext");
 			root.getChildren().add(textedit);
 			
