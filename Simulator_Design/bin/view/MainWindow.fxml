@@ -421,7 +421,7 @@
                   <Font name="System Bold" size="10.0" />
                </font>
             </JFXButton>
-            <AnchorPane fx:id="connectSim_pane2" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
+            <AnchorPane visible="false" fx:id="connectSim_pane2" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
                <children>
                   <Label layoutX="43.0" layoutY="23.0" text="You must be connected to the Flight Simulator in order" />
                   <Label layoutX="43.0" layoutY="40.0" text="to use the Surface Map panel." />

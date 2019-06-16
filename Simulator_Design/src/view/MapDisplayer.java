@@ -66,7 +66,8 @@ public class MapDisplayer extends Canvas {
 			widthBlock = width / coordinates[0].length;
 			heightBlock = height / coordinates.length;
 			
-		
+			//System.out.println(widthBlock);
+			//System.out.println(heightBlock);
 			GraphicsContext gc = getGraphicsContext2D();
 			
 			for(int i = 0; i < coordinates.length;i++) {
@@ -90,11 +91,14 @@ public class MapDisplayer extends Canvas {
 					//if(green > 255) green = 255;
 					//if(red > 255) red = 255;
 					
-					gc.setFill(new Color(red/255, green/255, 0.286, 1));
+				 	//System.out.println(red + "," + green);
+					gc.setFill(new Color(red/255, green/255, 0, 1));
 					gc.fillRect(j*widthBlock, i*heightBlock, widthBlock, heightBlock);					
 					
-					gc.setFill(Color.BLACK);
-					gc.fillText((int)coordinates[i][j] + "", j*widthBlock + 4, i*heightBlock + heightBlock - 4);
+					if(coordinates[0].length < 50) {
+						gc.setFill(Color.BLACK);
+						gc.fillText((int)coordinates[i][j] + "", j*widthBlock + 4, i*heightBlock + heightBlock - 4);
+					}
 				}
 				
 			}

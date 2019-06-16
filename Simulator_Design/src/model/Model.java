@@ -268,10 +268,12 @@ public class Model extends Observable implements SimModel {
 				if(result.isEmpty() || result == null)
 					continue;
 				
+				//System.out.println(result);
 				out.println(result);
 				out.flush();
 			}
 			
+			//System.out.println("end");
 			out.println("end");
 			out.flush();
 			
@@ -295,6 +297,7 @@ public class Model extends Observable implements SimModel {
 			clientMap.close();
 			
 		} catch (IOException e) {
+			//e.printStackTrace();
 			System.out.println("Could not connect to the map server!");
 			clientMap = null;
 			setChanged();
