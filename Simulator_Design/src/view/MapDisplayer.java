@@ -76,6 +76,11 @@ public class MapDisplayer extends Canvas {
 						red = 255;
 						green = 255;
 					}
+					else if(coordinates[i][j] == (max * 0.5))
+					{
+						red = 255;
+						green = 255;
+					}
 					else if(coordinates[i][j] <= max * 0.5)
 					{
 						red = 255;
