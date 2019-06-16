@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -17,6 +20,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
 
+import javafx.application.HostServices;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -28,6 +32,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -38,6 +43,7 @@ import viewmodel.ViewModel;
 public class MainWindowController implements Initializable, View, Observer {
 	
 	ViewModel viewModel;
+	private HostServices hostServices;
 	
 	// The Script editor
 	@FXML
@@ -79,6 +85,11 @@ public class MainWindowController implements Initializable, View, Observer {
 	@FXML
 	private MapDisplayer mapDisplayer;
 	
+	
+	// Etc
+	@FXML
+	private Label todaysDate;
+	
 	// Data Members
 	
 	private double radius = 0;
@@ -93,6 +104,9 @@ public class MainWindowController implements Initializable, View, Observer {
 	
 	// Map Data Members
 	
+	@FXML
+	JFXButton btn_connectSim211;
+	
 	private double maxMapPlane;
 	IntegerProperty planeCordX, planeCordY;
 	IntegerProperty destCordX, destCordY;
@@ -105,6 +119,13 @@ public class MainWindowController implements Initializable, View, Observer {
 	
 	@FXML
 	ListProject projectList;
+	
+	// Status data members
+	
+	@FXML
+	Label server_online, server_offline, client_online, client_offline, map_online, map_offline;
+	
+	// File
 	
 	StringProperty scriptFileName;
 	
@@ -121,6 +142,14 @@ public class MainWindowController implements Initializable, View, Observer {
 		simPlaneX = new SimpleDoubleProperty();
 		simPlaneY = new SimpleDoubleProperty();
 	}
+	
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices ;
+    }
+    
+    public HostServices getHostServices() {
+        return hostServices;
+    }
 	
 	@Override
 	public void setViewModel(ViewModel viewModel) {
@@ -160,6 +189,14 @@ public class MainWindowController implements Initializable, View, Observer {
 		
 		projectList.setXMLDirectory("./resources/projects.xml");
 		projectList.drawProjects();
+		
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		//System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
+		
+		//todaysDate.setText("Last time online: 25/04/2019");
+		todaysDate.setText("Last time online: " + dateFormat.format(date));
 	}
 	
 	public void handleButtonAction(ActionEvent event)
@@ -195,6 +232,15 @@ public class MainWindowController implements Initializable, View, Observer {
 		else if(event.getSource() == btn_map) {
 			map_pane.toFront();
 		}
+	}
+	
+	public void openGitHub() {
+		getHostServices().showDocument("https://github.com/danielpaz6/");
+		getHostServices().showDocument("https://github.com/OmerNahum/");
+	}
+	
+	public void learnMore() {
+		getHostServices().showDocument("https://github.com/danielpaz6/FlightSimulatorControl");
 	}
 	
 	public void handleMouseEvent(MouseEvent event) {
@@ -378,7 +424,7 @@ public class MainWindowController implements Initializable, View, Observer {
 		destCordY.set(mapDisplayer.destX);
 		
 		// Once picked new destination, we'll call re-calculate the path to the dest.
-		viewModel.calculateMap();
+		viewModel.calculateMap(mapDisplayer.coordinates);
 	}
 	
 	public void openConnectPopUp() throws IOException {
@@ -450,6 +496,11 @@ public class MainWindowController implements Initializable, View, Observer {
 		if(o == viewModel)
 		{ 
 			if(arg.equals("done_closePopUp")) {
+				client_online.setVisible(true);
+				client_offline.setVisible(false);
+				server_online.setVisible(true);
+				server_offline.setVisible(false);
+				
 				connectSim_pane.setVisible(false);
 				connectSim_pane2.setVisible(false);
 				
@@ -465,7 +516,7 @@ public class MainWindowController implements Initializable, View, Observer {
 					// Once plane moved, we'll call re-calculate the path to the dest.
 					if(mapDisplayer.isPlaneMoved == true)
 					{
-						viewModel.calculateMap();
+						viewModel.calculateMap(mapDisplayer.coordinates);
 						mapDisplayer.isPlaneMoved = false;
 					}
 				}
@@ -474,13 +525,7 @@ public class MainWindowController implements Initializable, View, Observer {
 				connectSim_pane.setVisible(true);
 				connectSim_pane2.setVisible(true);
 			}
-			else if(arg.equals("done map calculate")) {
-				//mapDisplayer.redraw(maxMapPlane);
-				//mapDisplayer.movePlane(planeCordX.get(), planeCordY.get());
-				//mapDisplayer.movePlaneByPosition(mapDisplayer.planeX, mapDisplayer.planeY);
-				//mapDisplayer.markDestByPosition(destCordY.get(), destCordX.get());
-				//mapDisplayer.drawPath(mapPathSol.get());
-				
+			else if(arg.equals("done map calculate")) {				
 				//System.out.println("done map calculate msg:");
 				String tmpPath = mapPathSol.get();
 				//System.out.println(tmpPath);
@@ -491,6 +536,14 @@ public class MainWindowController implements Initializable, View, Observer {
 				//System.out.println("about to print the setPath():");
 				mapDisplayer.setPath(tmpPath);
 				mapDisplayer.drawPath(tmpPath);
+			}
+			else if(arg.equals("done_closePopUpMap")) {
+				map_online.setVisible(true);
+				map_offline.setVisible(false);
+				btn_connectSim211.setVisible(false);
+			}
+			else if(arg.equals("doneMap_first_init")) {
+				viewModel.calculateMap(mapDisplayer.coordinates);
 			}
 		}
 		

@@ -121,14 +121,13 @@ public class Main extends Application {
 			textedit.setId("#scripttext");
 			textedit.setLayoutX(270);
 			textedit.setLayoutY(100);
+
 			//textedit.setStyle("scripttext");
 			root.getChildren().add(textedit);
 			
 			//System.out.println("test");
 			
 			Scene scene = new Scene(root,700,400);
-			
-			//getHostServices().showDocument("https://eclipse.org");
 			
 			// Sets the icon of the application
 			Image applicationIcon = new Image(getClass().getResourceAsStream("../airplane.png"));
@@ -168,6 +167,7 @@ public class Main extends Application {
 			
 			MainWindowController mwc= fxl.getController();
 			mwc.setViewModel(vm);
+			mwc.setHostServices(getHostServices());
 			vm.addObserver(mwc);
 			
 			

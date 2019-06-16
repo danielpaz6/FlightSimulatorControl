@@ -24,9 +24,10 @@ public interface SimModel {
 	public void connectToServer(String ip, double port); // Connecting to the Simulator as a client
 	
 	// Map Methods
-	public void connectToMapServer(String ip, double port, String mapCor, int planeX, int planeY, int destX, int destY); // Getting solution from Server
-	public void calculateMap(String mapCor, int planeX, int planeY, int destX, int destY);
+	public void connectToMapServer(String ip, double port, double[][] coordinates, int planeX, int planeY, int destX, int destY); // Getting solution from Server
+	public void calculateMap(double[][] coordinates, int planeX, int planeY, int destX, int destY);
 	public String getPath();	
 	// Run a script Methods
 	public void runScript(String text);
+	public boolean isMapServerAlive();
 }

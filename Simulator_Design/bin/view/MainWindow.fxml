@@ -71,37 +71,59 @@
             <AnchorPane fx:id="options_pane" layoutX="64.0" layoutY="245.0" prefHeight="159.0" prefWidth="171.0" style="-fx-background-color: #fff; -fx-background-radius: 1em;" visible="false" AnchorPane.bottomAnchor="14.0">
                <children>
                   <FontAwesomeIconView fill="#0747a6" glyphName="DESKTOP" layoutX="14.0" layoutY="25.0" size="15" />
-                  <Label layoutX="8.0" layoutY="44.0" text="RECENT">
+                  <Label layoutX="8.0" layoutY="44.0" text="SERVER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="8.0" layoutY="82.0" text="APPS">
+                  <Label layoutX="8.0" layoutY="82.0" text="CLIENT">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="8.0" layoutY="113.0" text="JIRA">
+                  <Label layoutX="8.0" layoutY="122.0" text="MAP SERVER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="8.0" layoutY="130.0" text="Bitbucket">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="53.0" layoutY="61.0" text="KeepToo Swing">
+                  <Label textFill="GREEN" fx:id="server_online" layoutX="53.0" layoutY="61.0" text="Online!" visible="false">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label layoutX="41.0" layoutY="11.0" text="Home">
+                  <Label textFill="RED" fx:id="server_offline" layoutX="53.0" layoutY="61.0" text="Offline!">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label textFill="GREEN" fx:id="client_online" layoutX="53.0" layoutY="101.0" text="Online!" visible="false">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label textFill="RED" fx:id="client_offline" layoutX="53.0" layoutY="101.0" text="Offline!">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label textFill="GREEN" fx:id="map_online" layoutX="53.0" layoutY="141.0" text="Online!" visible="false">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label textFill="RED" fx:id="map_offline" layoutX="53.0" layoutY="141.0" text="Offline!">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="41.0" layoutY="11.0" text="Status">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
                   <MaterialDesignIconView glyphName="BOOKMARK_OUTLINE" layoutX="35.0" layoutY="73.0" />
+                  <MaterialDesignIconView glyphName="BOOKMARK_OUTLINE" layoutX="35.0" layoutY="113.0" />
+                  <MaterialDesignIconView glyphName="BOOKMARK_OUTLINE" layoutX="35.0" layoutY="153.0" />
                   <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" layoutX="-5.0" layoutY="145.0" />
                </children>
             </AnchorPane>
@@ -437,14 +459,14 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="btn_learnmore" layoutX="91.0" layoutY="115.0" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 5em; -fx-border-color: #18a3fa; -fx-border-radius: 5em;" styleClass="btn_learnmore" text="Learn More" textFill="WHITE">
+                  <JFXButton onAction="#learnMore" fx:id="btn_learnmore" layoutX="91.0" layoutY="115.0" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 5em; -fx-border-color: #18a3fa; -fx-border-radius: 5em;" styleClass="btn_learnmore" text="Learn More" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
                         <Font name="System Bold" size="10.0" />
                      </font></JFXButton>
-                  <JFXButton fx:id="btn_github" layoutX="208.0" layoutY="115.0" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #fff; -fx-background-radius: 5em; -fx-border-color: #cccbcb; -fx-border-radius: 5em;" styleClass="btn_github" text=" My Github" textFill="#18a3fa">
+                  <JFXButton onAction="#openGitHub" fx:id="btn_github" layoutX="208.0" layoutY="115.0" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #fff; -fx-background-radius: 5em; -fx-border-color: #cccbcb; -fx-border-radius: 5em;" styleClass="btn_github" text=" Our Github" textFill="#18a3fa">
                      <graphic>
                         <OctIconView />
                      </graphic>
@@ -478,7 +500,7 @@
                   <FontAwesomeIconView glyphName="ELLIPSIS_H" layoutX="332.0" layoutY="18.0" size="10" AnchorPane.rightAnchor="12.285714149475098" />
                </children>
             </AnchorPane>
-            <Label layoutX="31.0" layoutY="389.0" text="Last time online: 25/04/2019" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="31.0" />
+            <Label fx:id="todaysDate" layoutX="31.0" layoutY="389.0" text="Last time online: 25/04/2019" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="31.0" />
          </children>
       </AnchorPane>
    </children>
