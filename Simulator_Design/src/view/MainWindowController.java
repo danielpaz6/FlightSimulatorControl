@@ -13,9 +13,6 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import org.fxmisc.flowless.VirtualizedScrollPane;
-import org.fxmisc.richtext.CodeArea;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
@@ -46,10 +43,6 @@ public class MainWindowController implements Initializable, View, Observer {
 	private HostServices hostServices;
 	
 	// The Script editor
-	@FXML
-	private VirtualizedScrollPane scripttext;
-	@FXML
-	private CodeArea scriptContent;
 	
 	// + ( More ) Buttons
 	@FXML
