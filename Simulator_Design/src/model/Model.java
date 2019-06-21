@@ -32,7 +32,7 @@ public class Model extends Observable implements SimModel {
 	Server server; // Simulator Server
 	
 	// Map Data members
-	MySerialServer mapServer; // Map Problem Solver Server
+	//MySerialServer mapServer; // Map Problem Solver Server
 	Socket clientMap;
 	PrintWriter out;
 	BufferedReader in;
@@ -178,7 +178,7 @@ public class Model extends Observable implements SimModel {
 	
 	@Override
 	public boolean isMapServerAlive() {
-		return mapServer != null ? true : false;
+		return clientMap != null ? true : false;
 	}
 
 	@Override
@@ -202,7 +202,7 @@ public class Model extends Observable implements SimModel {
 	@Override
 	public void connectToMapServer(String ip, double port, double[][] coordinates, int planeX, int planeY, int destX,
 	int destY) {
-		mapServerIp = ip;
+		/*mapServerIp = ip;
 		mapServerPort = (int)port;
 		
 		mapServer = new MySerialServer(mapSolverIP); 
@@ -230,10 +230,31 @@ public class Model extends Observable implements SimModel {
 
 		setChanged();
 		notifyObservers("connectToMapServer_success");
-		
+		*/
 		
 		// Connecting as client to the Map Server Solver and return cheapest path
 		//calculateMap(coordinates, planeX, planeY, destX, destY);
+		
+		//setChanged();
+		//notifyObservers("doneMap_first_init");
+		
+		/*try {
+			
+			clientMap = new Socket(mapServerIp, mapServerPort);
+			clientMap.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+			clientMap = null;
+			setChanged();
+			notifyObservers("connectToMapServer_failed");
+			return;
+		}*/
+		
+		mapServerIp = ip;
+		mapServerPort = (int)port;
+		
+		setChanged();
+		notifyObservers("connectToMapServer_success");
 		
 		setChanged();
 		notifyObservers("doneMap_first_init");
@@ -246,13 +267,17 @@ public class Model extends Observable implements SimModel {
 	}
 
 	public void calculateMap(double[][] coordinates, int planeX, int planeY, int destX, int destY) {
+		System.out.println("Enter calculateMap():");
 		try {
 			//if(clientMap == null) { 
 			clientMap = new Socket(mapServerIp, mapServerPort);
 			
+			System.out.println("We connected successfully to the Map!");
+			System.out.println(coordinates.length);
 			// If we passed this line, it means we logged in to Map Server.
 			setChanged();
 			notifyObservers("connectToServer_success");
+			System.out.println("after notify");
 			
 			clientMap.setSoTimeout(3000);				
 			out=new PrintWriter(clientMap.getOutputStream());
@@ -268,12 +293,12 @@ public class Model extends Observable implements SimModel {
 				if(result.isEmpty() || result == null)
 					continue;
 				
-				//System.out.println(result);
+				System.out.println(result);
 				out.println(result);
 				out.flush();
 			}
 			
-			//System.out.println("end");
+			System.out.println("end");
 			out.println("end");
 			out.flush();
 			
@@ -286,8 +311,10 @@ public class Model extends Observable implements SimModel {
 			out.flush();
 			
 			
+			System.out.println("we are about to in.readline()");
 			mapPathSol = in.readLine();
 			
+			System.out.println("We done map calculate!");
 			setChanged();
 			notifyObservers("done map calculate");
 			

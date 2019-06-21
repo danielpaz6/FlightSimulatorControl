@@ -380,7 +380,7 @@
             <Label layoutX="106.0" layoutY="382.0" text="Left" />
             <Label layoutX="202.0" layoutY="382.0" text="Center" />
             <Label layoutX="297.0" layoutY="382.0" text="Right" />
-            <AnchorPane fx:id="connectSim_pane" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
+            <AnchorPane fx:id="connectSim_pane" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
                <children>
                   <Label layoutX="43.0" layoutY="23.0" text="You must be connected to the Flight Simulator in order" />
                   <Label layoutX="43.0" layoutY="40.0" text="to use the Manual Control panel." />
@@ -397,7 +397,7 @@
             <!-- <Joystick fx:id="joystick" height="200.0" layoutX="113.0" layoutY="124.0" width="200.0" />-->
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="map_pane" layoutX="462.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="map_pane" layoutX="462.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="28.0" layoutY="22.0" text="Surface Map Vision">
                <font>
@@ -439,7 +439,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="dashboard_pane" layoutX="247.0" prefHeight="421.0" prefWidth="410.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="dashboard_pane" layoutX="247.0" prefHeight="421.0" prefWidth="410.0" style="-fx-background-color: #fff;" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="30.0" layoutY="60.0" prefHeight="173.0" prefWidth="356.0" style="-fx-border-color: #cdcdcd;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                <children>

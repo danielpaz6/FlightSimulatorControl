@@ -99,7 +99,7 @@ public class ViewModel extends Observable implements Observer {
 	}
 	
 	public void calculateMap(double[][] coordinates) {
-		if(model.isMapServerAlive())
+		//if(model.isMapServerAlive())
 			model.calculateMap(coordinates, this.planeCordX.get(),this.planeCordY.get(),this.destCordX.get(),this.destCordY.get());
 	}
 	
