@@ -9,16 +9,16 @@
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <?import view.MapDisplayer?>
 <?import view.ListProject?>
+<?import view.Joystick?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
    <children>
@@ -86,32 +86,32 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label textFill="GREEN" fx:id="server_online" layoutX="53.0" layoutY="61.0" text="Online!" visible="false">
+                  <Label fx:id="server_online" layoutX="53.0" layoutY="61.0" text="Online!" textFill="GREEN" visible="false">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label textFill="RED" fx:id="server_offline" layoutX="53.0" layoutY="61.0" text="Offline!">
+                  <Label fx:id="server_offline" layoutX="53.0" layoutY="61.0" text="Offline!" textFill="RED">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label textFill="GREEN" fx:id="client_online" layoutX="53.0" layoutY="101.0" text="Online!" visible="false">
+                  <Label fx:id="client_online" layoutX="53.0" layoutY="101.0" text="Online!" textFill="GREEN" visible="false">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label textFill="RED" fx:id="client_offline" layoutX="53.0" layoutY="101.0" text="Offline!">
+                  <Label fx:id="client_offline" layoutX="53.0" layoutY="101.0" text="Offline!" textFill="RED">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label textFill="GREEN" fx:id="map_online" layoutX="53.0" layoutY="141.0" text="Online!" visible="false">
+                  <Label fx:id="map_online" layoutX="53.0" layoutY="141.0" text="Online!" textFill="GREEN" visible="false">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label textFill="RED" fx:id="map_offline" layoutX="53.0" layoutY="141.0" text="Offline!">
+                  <Label fx:id="map_offline" layoutX="53.0" layoutY="141.0" text="Offline!" textFill="RED">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -354,7 +354,8 @@
                </graphic>
             </Label>
             <OctIconView glyphName="ARROW_RIGHT" layoutX="350.0" layoutY="267.0" size="15" style="-fx-rotate: 90;" />
-            <AnchorPane fx:id="joystickAnchor" layoutX="110.0" layoutY="110.0" prefHeight="110.0" prefWidth="110.0">
+            <Joystick fx:id="joystick" layoutX="110.0" layoutY="110.0" />
+            <!-- <AnchorPane fx:id="joystickAnchor" layoutX="110.0" layoutY="110.0" prefHeight="110.0" prefWidth="110.0">
                <children>
                   <Circle fx:id="outerjoystick" fill="WHITE" layoutX="124.0" layoutY="108.0" onMouseDragged="#dragable" onMousePressed="#dragable" onMouseReleased="#dragable_exit" radius="108.0" stroke="#0747a6" strokeType="INSIDE" strokeWidth="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Circle fx:id="btn_joystick" fill="#0e59c3" layoutX="108.0" layoutY="108.0" onMouseDragged="#dragable" onMousePressed="#dragable" onMouseReleased="#dragable_exit" radius="38.0" stroke="#0747a6" strokeType="INSIDE">
@@ -363,7 +364,7 @@
                      </effect>
                   </Circle>
                </children>
-            </AnchorPane>
+            </AnchorPane>-->
             <Label layoutX="4.0" layoutY="215.0" rotate="-90.0" text="Throttle">
                <font>
                   <Font name="System Bold Italic" size="13.0" />
@@ -379,7 +380,7 @@
             <Label layoutX="106.0" layoutY="382.0" text="Left" />
             <Label layoutX="202.0" layoutY="382.0" text="Center" />
             <Label layoutX="297.0" layoutY="382.0" text="Right" />
-            <AnchorPane fx:id="connectSim_pane" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
+            <AnchorPane fx:id="connectSim_pane" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
                <children>
                   <Label layoutX="43.0" layoutY="23.0" text="You must be connected to the Flight Simulator in order" />
                   <Label layoutX="43.0" layoutY="40.0" text="to use the Manual Control panel." />
@@ -393,9 +394,10 @@
                   </JFXButton>
                </children>
             </AnchorPane>
+            <!-- <Joystick fx:id="joystick" height="200.0" layoutX="113.0" layoutY="124.0" width="200.0" />-->
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="map_pane" layoutX="462.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="map_pane" layoutX="462.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="28.0" layoutY="22.0" text="Surface Map Vision">
                <font>
@@ -421,7 +423,7 @@
                   <Font name="System Bold" size="10.0" />
                </font>
             </JFXButton>
-            <AnchorPane visible="false" fx:id="connectSim_pane2" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
+            <AnchorPane fx:id="connectSim_pane2" layoutX="-6.0" layoutY="31.0" prefHeight="371.0" prefWidth="399.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="50.0">
                <children>
                   <Label layoutX="43.0" layoutY="23.0" text="You must be connected to the Flight Simulator in order" />
                   <Label layoutX="43.0" layoutY="40.0" text="to use the Surface Map panel." />
@@ -437,7 +439,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="dashboard_pane" layoutX="247.0" prefHeight="421.0" prefWidth="410.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="dashboard_pane" layoutX="247.0" prefHeight="421.0" prefWidth="410.0" style="-fx-background-color: #fff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="30.0" layoutY="60.0" prefHeight="173.0" prefWidth="356.0" style="-fx-border-color: #cdcdcd;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                <children>
@@ -459,14 +461,14 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXButton onAction="#learnMore" fx:id="btn_learnmore" layoutX="91.0" layoutY="115.0" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 5em; -fx-border-color: #18a3fa; -fx-border-radius: 5em;" styleClass="btn_learnmore" text="Learn More" textFill="WHITE">
+                  <JFXButton fx:id="btn_learnmore" layoutX="91.0" layoutY="115.0" onAction="#learnMore" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #18a3fa; -fx-background-radius: 5em; -fx-border-color: #18a3fa; -fx-border-radius: 5em;" styleClass="btn_learnmore" text="Learn More" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
                         <Font name="System Bold" size="10.0" />
                      </font></JFXButton>
-                  <JFXButton onAction="#openGitHub" fx:id="btn_github" layoutX="208.0" layoutY="115.0" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #fff; -fx-background-radius: 5em; -fx-border-color: #cccbcb; -fx-border-radius: 5em;" styleClass="btn_github" text=" Our Github" textFill="#18a3fa">
+                  <JFXButton fx:id="btn_github" layoutX="208.0" layoutY="115.0" onAction="#openGitHub" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #fff; -fx-background-radius: 5em; -fx-border-color: #cccbcb; -fx-border-radius: 5em;" styleClass="btn_github" text=" Our Github" textFill="#18a3fa">
                      <graphic>
                         <OctIconView />
                      </graphic>

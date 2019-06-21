@@ -25,6 +25,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -78,19 +79,12 @@ public class MainWindowController implements Initializable, View, Observer {
 	@FXML
 	private MapDisplayer mapDisplayer;
 	
+	@FXML
+	private Joystick joystick;
 	
 	// Etc
 	@FXML
 	private Label todaysDate;
-	
-	// Data Members
-	
-	private double radius = 0;
-	private double centerX = 0; // mouse location
-	private double centerY = 0;
-	
-	private double initializedCenterX = 0; // real location
-	private double initializedCenterY = 0;
 	
 	public DoubleProperty aileron, elevator;
 	public StringProperty getTextFromFile;
@@ -118,6 +112,8 @@ public class MainWindowController implements Initializable, View, Observer {
 	@FXML
 	Label server_online, server_offline, client_online, client_offline, map_online, map_offline;
 	
+	
+	double pressX, pressY;
 	// File
 	
 	StringProperty scriptFileName;
@@ -171,25 +167,39 @@ public class MainWindowController implements Initializable, View, Observer {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		initializedCenterX = btn_joystick.getLayoutX();
-		initializedCenterY = btn_joystick.getLayoutY();
-		
-		//mapDisplayer.setMapData(null, 0, 0, 0, 0); // map initialized to null ( white blocks ) 
-		
-		System.out.println(initializedCenterX + "," + initializedCenterY);
-		
 		this.scriptFileName.bind(projectList.scriptFileName);
 		
 		projectList.setXMLDirectory("./resources/projects.xml");
 		projectList.drawProjects();
 		
-		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
-		//System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
-		
-		//todaysDate.setText("Last time online: 25/04/2019");
 		todaysDate.setText("Last time online: " + dateFormat.format(date));
+		
+		// Joy-stick setup
+		joystick.setOnMouseDragged((e) -> {
+			joystick.moveJoystick(e.getSceneX(), e.getSceneY());
+			aileron.set(joystick.aileronVal);
+			elevator.set(joystick.elevatorVal);
+			
+			viewModel.updateAileronAndElevator();
+		});
+		
+		joystick.setOnMousePressed((e) -> {
+			joystick.moveJoystick(e.getSceneX(), e.getSceneY());
+			aileron.set(joystick.aileronVal);
+			elevator.set(joystick.elevatorVal);
+			
+			viewModel.updateAileronAndElevator();
+		});
+		
+		joystick.setOnMouseReleased((e) -> {
+			joystick.resetJoystick();
+			aileron.set(joystick.aileronVal);
+			elevator.set(joystick.elevatorVal);
+			
+			viewModel.updateAileronAndElevator();
+		});
 	}
 	
 	public void handleButtonAction(ActionEvent event)
@@ -240,79 +250,6 @@ public class MainWindowController implements Initializable, View, Observer {
 		if(event.getSource() == btn_status) {
 			options_pane.setVisible(false);
 		}
-	}
-	
-	private double dist(double x1, double y1, double x2, double y2) {
-		return Math.sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2));
-	}
-	
-	public void dragable(MouseEvent event) {
-		if(radius == 0) {
-			radius = outerjoystick.getRadius();
-			centerX = (btn_joystick.localToScene(btn_joystick.getBoundsInLocal()).getMinX() + btn_joystick.localToScene(btn_joystick.getBoundsInLocal()).getMaxX())/2;
-			centerY = (btn_joystick.localToScene(btn_joystick.getBoundsInLocal()).getMinY() + btn_joystick.localToScene(btn_joystick.getBoundsInLocal()).getMaxY())/2;
-						
-			/*System.out.println("-----------------------------------------");
-			System.out.println("Center: (X,Y) = " + centerX + "," + centerY);
-			System.out.println("Layout: (X, Y) = " + initializedCenterX + "," + initializedCenterY);
-			System.out.println("-----------------------------------------");*/
-		}
-		
-		double x1 = event.getSceneX();
-		double y1 = event.getSceneY();
-		double x2, y2;
-		
-		double distance = dist(event.getSceneX(), event.getSceneY(), centerX, centerY);
-		if(distance <= radius) {
-			btn_joystick.setLayoutX(initializedCenterX + x1 - centerX);
-			btn_joystick.setLayoutY(initializedCenterY + y1 - centerY);
-			
-			x2 = x1;
-			y2 = y1;
-		}
-		else
-		{
-			if(x1 > centerX) {
-				double alfa = Math.atan((y1-centerY)/(x1-centerX));
-				double w = radius * Math.cos(alfa);
-				double z = radius * Math.sin(alfa);
-				
-				x2 = centerX + w;
-				y2 = centerY + z;
-				
-				
-				btn_joystick.setLayoutX(initializedCenterX + x2 - centerX);
-				btn_joystick.setLayoutY(initializedCenterY + y2 - centerY);
-			}
-			else
-			{
-				double alfa = Math.atan((centerY - y1) / (centerX - x1));
-				double w = radius * Math.cos(alfa);
-				double z = radius * Math.sin(alfa);
-				
-				x2 = centerX - w;
-				y2 = centerY - z;
-			}
-			
-			btn_joystick.setLayoutX(initializedCenterX + x2 - centerX);
-			btn_joystick.setLayoutY(initializedCenterY + y2 - centerY);
-		}
-		
-		// Setting the Aileron & Elevator values
-		aileron.set((x2 - centerX) / radius);
-		elevator.set((centerY - y2) / radius);
-		
-		viewModel.updateAileronAndElevator();
-		//System.out.println("(airleron, elevator) = ("+aileron.get()+","+elevator.get()+")");		
-	}
-	
-	public void dragable_exit() {
-		btn_joystick.setLayoutX(initializedCenterX);
-		btn_joystick.setLayoutY(initializedCenterY);
-		
-		aileron.set(0);
-		elevator.set(0);
-		viewModel.updateAileronAndElevator();
 	}
 	
 	public void openFile() {
