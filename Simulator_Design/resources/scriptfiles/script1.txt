@@ -12,7 +12,7 @@ var elevator = bind "/controls/flight/elevator"
 var alt = bind "/instrumentation/altimeter/indicated-altitude-ft"
 var x = bind "/sim/current-view/viewer-x-m"
 var y = bind "/sim/current-view/viewer-y-m"
-sleep 145000
+sleep 98000
 breaks = 0
 throttle = 1
 var h0 = heading
