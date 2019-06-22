@@ -16,17 +16,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
-import algorithms.BestFirstSearch;
-import algorithms.MatrixProblem;
-import algorithms.Position;
-import algorithms.State;
 import interpreter.Interpreter;
 import interpreter.Server;
 import server.Client;
-import server_side.FileCacheManager;
-import server_side.MySerialServer;
-import server_side.SearchableClientHandler;
-import server_side.SearcherSolver;
 
 public class Model extends Observable implements SimModel {
 	Server server; // Simulator Server
@@ -44,15 +36,8 @@ public class Model extends Observable implements SimModel {
 	String mapServerIp;
 	int mapServerPort;
 	
-	// Default Map Solver IP
-	int mapSolverIP = 6420;
-	
 	String mapPathSol;
 	double simPlaneX, simPlaneY;
-	
-	
-	// Thread pool for map solutions
-	ExecutorService mapExecutor = Executors.newFixedThreadPool(2);
 	
 	
 	public Model(Server server) {
@@ -267,7 +252,7 @@ public class Model extends Observable implements SimModel {
 	}
 
 	public void calculateMap(double[][] coordinates, int planeX, int planeY, int destX, int destY) {
-		System.out.println("Enter calculateMap():");
+		//System.out.println("Enter calculateMap():");
 		try {
 			//if(clientMap == null) { 
 			clientMap = new Socket(mapServerIp, mapServerPort);
@@ -277,7 +262,7 @@ public class Model extends Observable implements SimModel {
 			// If we passed this line, it means we logged in to Map Server.
 			setChanged();
 			notifyObservers("connectToServer_success");
-			System.out.println("after notify");
+			//System.out.println("after notify");
 			
 			clientMap.setSoTimeout(3000);				
 			out=new PrintWriter(clientMap.getOutputStream());
@@ -293,12 +278,12 @@ public class Model extends Observable implements SimModel {
 				if(result.isEmpty() || result == null)
 					continue;
 				
-				System.out.println(result);
+				//System.out.println(result);
 				out.println(result);
 				out.flush();
 			}
 			
-			System.out.println("end");
+			//System.out.println("end");
 			out.println("end");
 			out.flush();
 			
@@ -311,10 +296,10 @@ public class Model extends Observable implements SimModel {
 			out.flush();
 			
 			
-			System.out.println("we are about to in.readline()");
+			//System.out.println("we are about to in.readline()");
 			mapPathSol = in.readLine();
 			
-			System.out.println("We done map calculate!");
+			//System.out.println("We done map calculate!");
 			setChanged();
 			notifyObservers("done map calculate");
 			

@@ -1,9 +1,6 @@
 package model;
 
 import java.util.List;
-
-import algorithms.Position;
-import algorithms.State;
 import interpreter.Server;
 
 public interface SimModel {
