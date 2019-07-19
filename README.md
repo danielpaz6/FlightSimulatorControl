@@ -1,7 +1,7 @@
 # Flight Simulator Control
 
 
-[![Presentation Project](/uml/demo.png)](https://www.youtube.com/watch?v=GJdyEY4cXHk)
+[![Presentation Project](/uml/demo3.png)](https://www.youtube.com/watch?v=GJdyEY4cXHk)
 
 
 A java project we made during the semester.
@@ -205,19 +205,18 @@ So this was our application with emphasis on many programming principles.
 
 ## Getting Started
 
-In order to fulfill this research needs, I had to learn Python independently, since it is a language that supports functional programming, friendly, and is suitable for the purposes of research.
-
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them:
+What things you need to install the software and how to install them.
 
 imports / technologies:
 
 * javafx
 * fontawesomefx-8.9
 * jfoenix-8.0.8
+* updated Java Development Kit ( JDK )
 
 ## Built With
 
