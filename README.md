@@ -1,5 +1,9 @@
 # Flight Simulator Control
 
+
+[![Presentation Project](/uml/demo.png)](https://www.youtube.com/watch?v=GJdyEY4cXHk)
+
+
 A java project we made during the semester.
 
 ## Introduction
