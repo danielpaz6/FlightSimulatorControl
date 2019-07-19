@@ -217,6 +217,7 @@ imports / technologies:
 * fontawesomefx-8.9
 * jfoenix-8.0.8
 * updated Java Development Kit ( JDK )
+* [Flight Gear](https://www.flightgear.org/) - open-source flight simulator
 
 ## Built With
 
